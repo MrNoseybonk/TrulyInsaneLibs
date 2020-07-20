@@ -11,4 +11,6 @@ end;
 /
 
 insert into person (username, pssword)
-values ('swilson', 'password');
+values ('swilson', 'pass');
+
+commit;
