@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainNavBarComponent } from './Components/main-nav-bar/main-nav-bar.component';
+import { LibuploadComponent } from './Components/libupload/libupload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainNavBarComponent
+    MainNavBarComponent,
+    LibuploadComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

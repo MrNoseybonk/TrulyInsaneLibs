@@ -2,9 +2,13 @@
     <nav class="mainNav">
         <div class="navButtonSection">
             <a class="firstBtn" routerLink="/">Main Page</a>
+            <a class="secondBtn" routerLink="/upload">Create Insane Lib</a>
         </div>
         <div class="navLogout">
             <a class="logoutBtn" routerLink="/" (click)="logout()">Logout</a>
+        </div>
+        <div class="loggedIn" *ngIf=loginMessage>
+            {{loginMessage}}
         </div>
     </nav>
 </div>

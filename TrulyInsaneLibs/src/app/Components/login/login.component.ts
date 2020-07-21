@@ -21,6 +21,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.logMade = false;
+    if (localStorage.getItem('currentUser') != null)
+    {
+      console.log('Logged in.');
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.loggedUser = this.user.username;
+    }
+    else
+    {
+      console.log('Logged out.');
+      this.loggedUser = null;
+    }
   }
 
   login()
@@ -31,7 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginMessage = document.getElementById('login');
       this.user = resp;
       this.loggedUser = this.user.username;
-      this.loginMessage.style.display = 'none';
     });
   }
 

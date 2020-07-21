@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-main-nav-bar',
@@ -7,18 +8,23 @@ import { LoginService } from 'src/app/login.service';
   styleUrls: ['./main-nav-bar.component.css']
 })
 export class MainNavBarComponent implements OnInit {
+  loggedUser: User;
+  loginMessage: string;
 
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.loginService.currentUser.subscribe(user => this.loggedUser = user);
+    if (this.loggedUser != null)
+    {
+      this.loginMessage = this.loggedUser.username;
+    }
   }
 
   logout()
   {
-    console.log(localStorage.getItem('currentUser'));
     this.loginService
     .logout();
-
-    console.log(localStorage.getItem('currentUser'));
+    this.loginMessage = '';
   }
 }

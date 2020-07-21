@@ -26,7 +26,7 @@ export class LoginService {
   }
 
   logout() {
-    console.log('User logged out.');
+    alert('You have logged out.')
     this.http.delete(this.urlService.getUrl() + 'login').subscribe(data => {});
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
