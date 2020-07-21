@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileuploadService } from 'src/app/fileupload.service';
 import { Subscription } from 'rxjs';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-libupload',
@@ -13,15 +14,25 @@ export class LibuploadComponent implements OnInit {
 
   totals: any;
   nouns: number;
+  nounsArr: number[];
   plurals: number;
+  pluralsArr: number[];
   verbs: number;
+  verbsArr: number[];
   adjectives: number;
+  adjArr: number[];
   colors: number;
+  colorsArr: number[];
   ings: number;
+  ingsArr: number[];
   adverbs: number;
+  adverbsArr: number[];
   propers: number;
+  propArr: number[];
   numbers: number;
+  numbArr: number[];
   pasts: number;
+  pastsArr: number[];
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
@@ -75,6 +86,17 @@ export class LibuploadComponent implements OnInit {
       this.propers = this.totals.propers;
       this.numbers = this.totals.numbers;
       this.pasts = this.totals.pasts;
+
+      this.nounsArr = [];
+      this.pluralsArr = [];
+      this.verbsArr = [];
+      this.adjArr = [];
+      this.colorsArr = [];
+      this.ingsArr = [];
+      this.adverbsArr = [];
+      this.propArr = [];
+      this.numbArr = [];
+      this.pastsArr = [];
       console.log(this.nouns);
       console.log(this.plurals);
       console.log(this.verbs);
@@ -85,6 +107,10 @@ export class LibuploadComponent implements OnInit {
       console.log(this.propers);
       console.log(this.numbers);
       console.log(this.pasts);
+      for (let i = 0; i < this.nouns; i++)
+      {
+        this.nounsArr.push(1);
+      }
      } );
   }
 }

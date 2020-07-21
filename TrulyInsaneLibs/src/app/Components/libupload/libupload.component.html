@@ -1,10 +1,13 @@
 <div class="intro">
     <p>Please upload your txt file to be used.</p>
 </div>
-<div class="body">
+<div class="uploader">
     <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
         <input type="file" accept=".txt" (change)="onFileChange($event)" />
         <input type="submit" [disabled]="formGroup.invalid" value="upload" />
     </form>
     <span id="fileName" *ngIf=fileName>{{fileName}}</span>
+</div>
+<div class="inputs">
+    <p *ngFor="let number of nounsArr">Noun</p>
 </div>
