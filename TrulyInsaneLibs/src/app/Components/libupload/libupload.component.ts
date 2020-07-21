@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileuploadService } from 'src/app/fileupload.service';
 import { Subscription } from 'rxjs';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-libupload',
@@ -97,19 +96,55 @@ export class LibuploadComponent implements OnInit {
       this.propArr = [];
       this.numbArr = [];
       this.pastsArr = [];
-      console.log(this.nouns);
-      console.log(this.plurals);
-      console.log(this.verbs);
-      console.log(this.adjectives);
-      console.log(this.colors);
-      console.log(this.ings);
-      console.log(this.adverbs);
-      console.log(this.propers);
-      console.log(this.numbers);
-      console.log(this.pasts);
+
       for (let i = 0; i < this.nouns; i++)
       {
         this.nounsArr.push(1);
+      }
+
+      for (let i = 0; i < this.plurals; i++)
+      {
+        this.pluralsArr.push(1);
+      }
+
+      for (let i = 0; i < this.verbs; i++)
+      {
+        this.verbsArr.push(1);
+      }
+
+      for (let i = 0; i < this.adjectives; i++)
+      {
+        this.adjArr.push(1);
+      }
+
+      for (let i = 0; i < this.colors; i++)
+      {
+        this.colorsArr.push(1);
+      }
+
+      for (let i = 0; i < this.ings; i++)
+      {
+        this.ingsArr.push(1);
+      }
+
+      for (let i = 0; i < this.adverbs; i++)
+      {
+        this.adverbsArr.push(1);
+      }
+
+      for (let i = 0; i < this.propers; i++)
+      {
+        this.propArr.push(1);
+      }
+
+      for (let i = 0; i < this.numbers; i++)
+      {
+        this.numbArr.push(1);
+      }
+
+      for (let i = 0; i < this.pasts; i++)
+      {
+        this.pastsArr.push(1);
       }
      } );
   }
