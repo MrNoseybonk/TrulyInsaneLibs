@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileuploadService } from 'src/app/fileupload.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-libupload',
@@ -8,6 +9,7 @@ import { FileuploadService } from 'src/app/fileupload.service';
   styleUrls: ['./libupload.component.css']
 })
 export class LibuploadComponent implements OnInit {
+  private libSub: Subscription;
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
@@ -39,6 +41,7 @@ export class LibuploadComponent implements OnInit {
 
   public onSubmit(): void
   {
-    this.fileUploadService.upload(this.fileName, this.formGroup.get('file').value);
+    this.libSub = this.fileUploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
+      console.log(resp); } );
   }
 }
