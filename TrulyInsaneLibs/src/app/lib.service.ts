@@ -35,6 +35,8 @@ export class LibService {
       this.librequest.lib = this.lib;
       this.librequest.words = words;
 
+      console.log(this.librequest);
+
       return this.http.put<any>(this.urlService.getUrl() + 'lib', this.librequest, {headers: this.regHeaders, withCredentials: true })
         .pipe(map( resp => resp ));
     }

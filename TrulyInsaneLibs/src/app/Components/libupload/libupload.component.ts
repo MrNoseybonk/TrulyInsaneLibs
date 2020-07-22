@@ -14,26 +14,57 @@ export class LibuploadComponent implements OnInit {
   private createSub: Subscription;
 
   totals: any;
-  nounsArr: any[];
+
+  nounsArr: any[] = [{
+    noun: ''
+  }];
   nouns: string[];
-  pluralsArr: number[];
+
+  pluralsArr: any[] = [{
+    plural: ''
+  }];
   plurals: string[];
-  verbsArr: number[];
+
+  verbsArr: any[] = [{
+    verb: ''
+  }];
   verbs: string[];
-  adjArr: number[];
+
+  adjArr: any[] = [{
+    adjective: ''
+  }];
   adjectives: string[];
-  colorsArr: number[];
+
+  colorsArr: any[] = [{
+    color: ''
+  }];
   colors: string[];
-  ingsArr: number[];
+
+  ingsArr: any[] = [{
+    ing: ''
+  }];
   ings: string[];
-  adverbsArr: number[];
+
+  adverbsArr: any[] = [{
+    adverb: ''
+  }];
   adverbs: string[];
-  propArr: number[];
+
+  propArr: any[] = [{
+    proper: ''
+  }];
   propers: string[];
-  numbArr: number[];
+
+  numbArr: any[] = [{
+    number: ''
+  }];
   numbers: string[];
-  pastsArr: number[];
+
+  pastsArr: any[] = [{
+    past: ''
+  }];
   pasts: string[];
+
   words: Words;
   finishedLib: any;
 
@@ -70,22 +101,81 @@ export class LibuploadComponent implements OnInit {
     this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
 
-      this.nounsArr = new Array(this.totals.nouns);
-      this.pluralsArr = new Array(this.totals.plurals);
-      this.verbsArr = new Array(this.totals.verbs);
-      this.adjArr = new Array(this.totals.adjectives);
-      this.colorsArr = new Array(this.totals.colors);
-      this.ingsArr = new Array(this.totals.ings);
-      this.adverbsArr = new Array(this.totals.adverbs);
-      this.propArr = new Array(this.totals.propers);
-      this.numbArr = new Array(this.totals.numbers);
-      this.pastsArr = new Array(this.totals.pasts);
+      for (let i = 0; i < (this.totals.nouns - 1); i++)
+      {
+        this.nounsArr.push({
+          noun: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.plurals - 1); i++)
+      {
+        this.pluralsArr.push({
+          plural: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.verbs - 1); i++)
+      {
+        this.verbsArr.push({
+          verb: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.adjectives - 1); i++)
+      {
+        this.adjArr.push({
+          adjective: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.colors - 1); i++)
+      {
+        this.colorsArr.push({
+          color: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.ings - 1); i++)
+      {
+        this.ingsArr.push({
+          ing: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.adverbs - 1); i++)
+      {
+        this.adverbsArr.push({
+          adverb: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.propers - 1); i++)
+      {
+        this.propArr.push({
+          proper: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.numbers - 1); i++)
+      {
+        this.numbArr.push({
+          number: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.pasts - 1); i++)
+      {
+        this.pastsArr.push({
+          past: ''
+        });
+      }
      } );
   }
 
   onCreate()
   {
-    alert('Create pressed!');
+    // alert('Create pressed!');
     this.nouns = new Array(this.totals.nouns);
     this.plurals = new Array(this.totals.plurals);
     this.verbs = new Array(this.totals.verbs);
@@ -101,62 +191,52 @@ export class LibuploadComponent implements OnInit {
 
     for (let i = 0; i < this.totals.nouns; i++)
     {
-      const nounBox = document.getElementById('noun_' + i);
-      this.nouns[i] = nounBox.value;
+      this.nouns[i] = this.nounsArr[i].noun;
     }
 
     for (let i = 0; i < this.totals.plurals; i++)
     {
-      const pluralBox = document.getElementById('plural_' + i);
-      this.plurals[i] = pluralBox.value;
+      this.plurals[i] = this.pluralsArr[i].plural;
     }
 
     for (let i = 0; i < this.totals.verbs; i++)
     {
-      const verbBox = document.getElementById('verb_' + i);
-      this.verbs[i] = verbBox.value;
+      this.verbs[i] = this.verbsArr[i].verb;
     }
 
     for (let i = 0; i < this.totals.adjectives; i++)
     {
-      const adjectiveBox = document.getElementById('adj_' + i);
-      this.adjectives[i] = adjectiveBox.value;
+      this.adjectives[i] = this.adjArr[i].adjective;
     }
 
     for (let i = 0; i < this.totals.colors; i++)
     {
-      const colorBox = document.getElementById('color_' + i);
-      this.colors[i] = colorBox.value;
+      this.colors[i] = this.colorsArr[i].color;
     }
 
     for (let i = 0; i < this.totals.ings; i++)
     {
-      const ingBox = document.getElementById('ing_' + i);
-      this.ings[i] = ingBox.value;
+      this.ings[i] = this.ingsArr[i].ing;
     }
 
     for (let i = 0; i < this.totals.adverbs; i++)
     {
-      const adverbBox = document.getElementById('adverb_' + i);
-      this.adverbs[i] = adverbBox.value;
+      this.adverbs[i] = this.adverbsArr[i].adverb;
     }
 
     for (let i = 0; i < this.totals.propers; i++)
     {
-      const properBox = document.getElementById('prop_' + i);
-      this.propers[i] = properBox.value;
+      this.propers[i] = this.propArr[i].proper;
     }
 
     for (let i = 0; i < this.totals.numbers; i++)
     {
-      const numberBox = document.getElementById('numb_' + i);
-      this.numbers[i] = numberBox.value;
+      this.numbers[i] = this.numbArr[i].number;
     }
 
     for (let i = 0; i < this.totals.pasts; i++)
     {
-      const pastBox = document.getElementById('past_' + i);
-      this.pasts[i] = pastBox.value;
+      this.pasts[i] = this.pastsArr[i].past;
     }
 
     // console.log(this.nouns);
@@ -181,7 +261,7 @@ export class LibuploadComponent implements OnInit {
     this.words.numbers = this.numbers;
     this.words.pasts = this.pasts;
 
-    //console.log(this.words);
+    // console.log(this.words);
 
     this.createSub = this.libService.createLib(this.formGroup.get('file').value, this.words).subscribe((resp) => {
       this.finishedLib = resp.lib;
