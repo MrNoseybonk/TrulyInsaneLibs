@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FileuploadService } from 'src/app/fileupload.service';
+import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
+import { Words } from 'src/app/Models/words';
 
 @Component({
   selector: 'app-libupload',
@@ -10,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class LibuploadComponent implements OnInit {
   private libSub: Subscription;
+  private createSub: Subscription;
 
   totals: any;
   nounsArr: any[];
@@ -32,6 +34,8 @@ export class LibuploadComponent implements OnInit {
   numbers: string[];
   pastsArr: number[];
   pasts: string[];
+  words: Words;
+  finishedLib: any;
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
@@ -39,7 +43,7 @@ export class LibuploadComponent implements OnInit {
 
   public fileName;
 
-  constructor(private fb: FormBuilder, private fileUploadService: FileuploadService) { }
+  constructor(private fb: FormBuilder, private libService: LibService) { }
 
   ngOnInit(): void {
   }
@@ -63,7 +67,7 @@ export class LibuploadComponent implements OnInit {
 
   public onSubmit(): void
   {
-    this.libSub = this.fileUploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
+    this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
 
       this.nounsArr = new Array(this.totals.nouns);
@@ -92,6 +96,8 @@ export class LibuploadComponent implements OnInit {
     this.propers = new Array(this.totals.propers);
     this.numbers = new Array(this.totals.numbers);
     this.pasts = new Array(this.totals.pasts);
+
+    this.words = new Words();
 
     for (let i = 0; i < this.totals.nouns; i++)
     {
@@ -153,15 +159,32 @@ export class LibuploadComponent implements OnInit {
       this.pasts[i] = pastBox.value;
     }
 
-    console.log(this.nouns);
-    console.log(this.plurals);
-    console.log(this.verbs);
-    console.log(this.adjectives);
-    console.log(this.colors);
-    console.log(this.ings);
-    console.log(this.adverbs);
-    console.log(this.propers);
-    console.log(this.numbers);
-    console.log(this.pasts);
+    // console.log(this.nouns);
+    // console.log(this.plurals);
+    // console.log(this.verbs);
+    // console.log(this.adjectives);
+    // console.log(this.colors);
+    // console.log(this.ings);
+    // console.log(this.adverbs);
+    // console.log(this.propers);
+    // console.log(this.numbers);
+    // console.log(this.pasts);
+
+    this.words.nouns = this.nouns;
+    this.words.plurals = this.plurals;
+    this.words.verbs = this.verbs;
+    this.words.adjectives = this.adjectives;
+    this.words.colors = this.colors;
+    this.words.ings = this.ings;
+    this.words.adverbs = this.adverbs;
+    this.words.propers = this.propers;
+    this.words.numbers = this.numbers;
+    this.words.pasts = this.pasts;
+
+    //console.log(this.words);
+
+    this.createSub = this.libService.createLib(this.words).subscribe((resp) => {
+      this.finishedLib = resp.lib;
+    });
   }
 }

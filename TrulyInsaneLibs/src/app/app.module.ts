@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainNavBarComponent } from './Components/main-nav-bar/main-nav-bar.component';
 import { LibuploadComponent } from './Components/libupload/libupload.component';
-import { FileuploadService } from './fileupload.service';
+import { LibService } from './lib.service';
 import { LoginService } from './login.service';
 import { UrlService } from './url.service';
 
@@ -27,7 +27,7 @@ import { UrlService } from './url.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FileuploadService, LoginService, UrlService],
+  providers: [LibService, LoginService, UrlService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

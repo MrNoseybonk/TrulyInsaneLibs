@@ -5,11 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Lib;
 import com.revature.beans.WordTotals;
+import com.revature.beans.Words;
 import com.revature.services.LibService;
 
 @RestController
@@ -31,5 +34,17 @@ public class LibController
 		session.setAttribute("uploadlib", lib);
 
 		return ResponseEntity.ok(totals);
+	}
+	
+	@PutMapping
+	public ResponseEntity<Lib> sendLib(HttpSession session, @RequestBody Words words)
+	{
+		Lib lib = new Lib();
+		
+		System.out.println(words);
+		
+		lib.setLib("Testing.");
+		
+		return ResponseEntity.ok(lib);
 	}
 }
