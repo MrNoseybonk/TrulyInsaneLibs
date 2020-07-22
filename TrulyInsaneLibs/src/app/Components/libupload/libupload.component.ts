@@ -21,7 +21,7 @@ export class LibuploadComponent implements OnInit {
   nouns: string[];
 
   pluralsArr: any[] = [{
-    plural: ''
+    noun: ''
   }];
   plurals: string[];
 
@@ -101,11 +101,17 @@ export class LibuploadComponent implements OnInit {
     this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
 
+
       for (let i = 0; i < (this.totals.nouns - 1); i++)
       {
         this.nounsArr.push({
           noun: ''
         });
+      }
+
+      if (this.totals.nouns === 0)
+      {
+        this.nounsArr = new Array();
       }
 
       for (let i = 0; i < (this.totals.plurals - 1); i++)
@@ -115,11 +121,21 @@ export class LibuploadComponent implements OnInit {
         });
       }
 
+      if (this.totals.plurals === 0)
+      {
+        this.pluralsArr = new Array();
+      }
+
       for (let i = 0; i < (this.totals.verbs - 1); i++)
       {
         this.verbsArr.push({
           verb: ''
         });
+      }
+
+      if (this.totals.verbs === 0)
+      {
+        this.verbsArr = new Array();
       }
 
       for (let i = 0; i < (this.totals.adjectives - 1); i++)
@@ -129,11 +145,21 @@ export class LibuploadComponent implements OnInit {
         });
       }
 
+      if (this.totals.adjectives === 0)
+      {
+        this.adjArr = new Array();
+      }
+
       for (let i = 0; i < (this.totals.colors - 1); i++)
       {
         this.colorsArr.push({
           color: ''
         });
+      }
+
+      if (this.totals.colors === 0)
+      {
+        this.colorsArr = new Array();
       }
 
       for (let i = 0; i < (this.totals.ings - 1); i++)
@@ -143,11 +169,21 @@ export class LibuploadComponent implements OnInit {
         });
       }
 
+      if (this.totals.ings === 0)
+      {
+        this.ingsArr = new Array();
+      }
+
       for (let i = 0; i < (this.totals.adverbs - 1); i++)
       {
         this.adverbsArr.push({
           adverb: ''
         });
+      }
+
+      if (this.totals.adverbs === 0)
+      {
+        this.adverbsArr = new Array();
       }
 
       for (let i = 0; i < (this.totals.propers - 1); i++)
@@ -157,6 +193,11 @@ export class LibuploadComponent implements OnInit {
         });
       }
 
+      if (this.totals.propers === 0)
+      {
+        this.propArr = new Array();
+      }
+
       for (let i = 0; i < (this.totals.numbers - 1); i++)
       {
         this.numbArr.push({
@@ -164,11 +205,21 @@ export class LibuploadComponent implements OnInit {
         });
       }
 
+      if (this.totals.numbers === 0)
+      {
+        this.totals.numbArr = new Array();
+      }
+
       for (let i = 0; i < (this.totals.pasts - 1); i++)
       {
         this.pastsArr.push({
           past: ''
         });
+      }
+
+      if (this.totals.pasts === 0)
+      {
+        this.pastsArr = new Array();
       }
      } );
   }
