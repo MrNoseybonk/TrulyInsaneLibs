@@ -12,34 +12,24 @@ export class LibuploadComponent implements OnInit {
   private libSub: Subscription;
 
   totals: any;
-  nounsTotal: number;
   nounsArr: any[];
   nouns: string[];
-  pluralsTotal: number;
   pluralsArr: number[];
   plurals: string[];
-  verbsTotal: number;
   verbsArr: number[];
   verbs: string[];
-  adjectivesTotal: number;
   adjArr: number[];
   adjectives: string[];
-  colorsTotal: number;
   colorsArr: number[];
   colors: string[];
-  ingsTotal: number;
   ingsArr: number[];
   ings: string[];
-  adverbsTotal: number;
   adverbsArr: number[];
   adverbs: string[];
-  propersTotal: number;
   propArr: number[];
   propers: string[];
-  numbersTotal: number;
   numbArr: number[];
   numbers: string[];
-  pastsTotal: number;
   pastsArr: number[];
   pasts: string[];
 
@@ -52,16 +42,6 @@ export class LibuploadComponent implements OnInit {
   constructor(private fb: FormBuilder, private fileUploadService: FileuploadService) { }
 
   ngOnInit(): void {
-    this.nounsTotal = 0;
-    this.pluralsTotal = 0;
-    this.verbsTotal = 0;
-    this.adjectivesTotal = 0;
-    this.colorsTotal = 0;
-    this.ingsTotal = 0;
-    this.adverbsTotal = 0;
-    this.propersTotal = 0;
-    this.numbersTotal = 0;
-    this.pastsTotal = 0;
   }
 
   public onFileChange(event)
@@ -85,96 +65,103 @@ export class LibuploadComponent implements OnInit {
   {
     this.libSub = this.fileUploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
-      this.nounsTotal = this.totals.nouns;
-      this.pluralsTotal = this.totals.plurals;
-      this.verbsTotal = this.totals.verbs;
-      this.adjectivesTotal = this.totals.adjectives;
-      this.colorsTotal = this.totals.colors;
-      this.ingsTotal = this.totals.ings;
-      this.adverbsTotal = this.totals.adverbs;
-      this.propersTotal = this.totals.propers;
-      this.numbersTotal = this.totals.numbers;
-      this.pastsTotal = this.totals.pasts;
 
-      console.log('onSubmit nounsTotal: ' + this.nounsTotal);
-      this.nounsArr = new Array(this.nounsTotal);
-      this.pluralsArr = [];
-      this.verbsArr = [];
-      this.adjArr = [];
-      this.colorsArr = [];
-      this.ingsArr = [];
-      this.adverbsArr = [];
-      this.propArr = [];
-      this.numbArr = [];
-      this.pastsArr = [];
-
-      for (let i = 0; i < this.pluralsTotal; i++)
-      {
-        this.pluralsArr.push(i);
-      }
-
-      for (let i = 0; i < this.verbsTotal; i++)
-      {
-        this.verbsArr.push(i);
-      }
-
-      for (let i = 0; i < this.adjectivesTotal; i++)
-      {
-        this.adjArr.push(i);
-      }
-
-      for (let i = 0; i < this.colorsTotal; i++)
-      {
-        this.colorsArr.push(i);
-      }
-
-      for (let i = 0; i < this.ingsTotal; i++)
-      {
-        this.ingsArr.push(i);
-      }
-
-      for (let i = 0; i < this.adverbsTotal; i++)
-      {
-        this.adverbsArr.push(i);
-      }
-
-      for (let i = 0; i < this.propersTotal; i++)
-      {
-        this.propArr.push(i);
-      }
-
-      for (let i = 0; i < this.numbersTotal; i++)
-      {
-        this.numbArr.push(i);
-      }
-
-      for (let i = 0; i < this.pastsTotal; i++)
-      {
-        this.pastsArr.push(i);
-      }
+      this.nounsArr = new Array(this.totals.nouns);
+      this.pluralsArr = new Array(this.totals.plurals);
+      this.verbsArr = new Array(this.totals.verbs);
+      this.adjArr = new Array(this.totals.adjectives);
+      this.colorsArr = new Array(this.totals.colors);
+      this.ingsArr = new Array(this.totals.ings);
+      this.adverbsArr = new Array(this.totals.adverbs);
+      this.propArr = new Array(this.totals.propers);
+      this.numbArr = new Array(this.totals.numbers);
+      this.pastsArr = new Array(this.totals.pasts);
      } );
   }
 
   onCreate()
   {
     alert('Create pressed!');
-    this.nouns = new Array(this.nounsTotal);
-    this.plurals = [];
-    this.verbs = [];
-    this.adjectives = [];
-    this.colors = [];
-    this.ings = [];
-    this.adverbs = [];
-    this.propers = [];
-    this.numbers = [];
-    this.pasts = [];
+    this.nouns = new Array(this.totals.nouns);
+    this.plurals = new Array(this.totals.plurals);
+    this.verbs = new Array(this.totals.verbs);
+    this.adjectives = new Array(this.totals.adjectives);
+    this.colors = new Array(this.totals.colors);
+    this.ings = new Array(this.totals.ings);
+    this.adverbs = new Array(this.totals.adverbs);
+    this.propers = new Array(this.totals.propers);
+    this.numbers = new Array(this.totals.numbers);
+    this.pasts = new Array(this.totals.pasts);
 
-    for (let i = 0; i < this.nounsTotal; i++)
+    for (let i = 0; i < this.totals.nouns; i++)
     {
       const nounBox = document.getElementById('noun_' + i);
       this.nouns[i] = nounBox.value;
     }
 
+    for (let i = 0; i < this.totals.plurals; i++)
+    {
+      const pluralBox = document.getElementById('plural_' + i);
+      this.plurals[i] = pluralBox.value;
+    }
+
+    for (let i = 0; i < this.totals.verbs; i++)
+    {
+      const verbBox = document.getElementById('verb_' + i);
+      this.verbs[i] = verbBox.value;
+    }
+
+    for (let i = 0; i < this.totals.adjectives; i++)
+    {
+      const adjectiveBox = document.getElementById('adj_' + i);
+      this.adjectives[i] = adjectiveBox.value;
+    }
+
+    for (let i = 0; i < this.totals.colors; i++)
+    {
+      const colorBox = document.getElementById('color_' + i);
+      this.colors[i] = colorBox.value;
+    }
+
+    for (let i = 0; i < this.totals.ings; i++)
+    {
+      const ingBox = document.getElementById('ing_' + i);
+      this.ings[i] = ingBox.value;
+    }
+
+    for (let i = 0; i < this.totals.adverbs; i++)
+    {
+      const adverbBox = document.getElementById('adverb_' + i);
+      this.adverbs[i] = adverbBox.value;
+    }
+
+    for (let i = 0; i < this.totals.propers; i++)
+    {
+      const properBox = document.getElementById('prop_' + i);
+      this.propers[i] = properBox.value;
+    }
+
+    for (let i = 0; i < this.totals.numbers; i++)
+    {
+      const numberBox = document.getElementById('numb_' + i);
+      this.numbers[i] = numberBox.value;
+    }
+
+    for (let i = 0; i < this.totals.pasts; i++)
+    {
+      const pastBox = document.getElementById('past_' + i);
+      this.pasts[i] = pastBox.value;
+    }
+
     console.log(this.nouns);
+    console.log(this.plurals);
+    console.log(this.verbs);
+    console.log(this.adjectives);
+    console.log(this.colors);
+    console.log(this.ings);
+    console.log(this.adverbs);
+    console.log(this.propers);
+    console.log(this.numbers);
+    console.log(this.pasts);
   }
 }
