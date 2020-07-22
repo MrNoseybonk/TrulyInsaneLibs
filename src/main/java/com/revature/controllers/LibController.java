@@ -38,12 +38,7 @@ public class LibController
 	@PutMapping
 	public ResponseEntity<Lib> sendLib(HttpSession session, @RequestBody LibRequest libRequest)
 	{
-		Lib finishedLib = new Lib();
-		
-		finishedLib = libRequest.getLib();
-		System.out.println(libRequest.getWords());
-		
-		//lib = libServ.finishLib(session.getAttribute("uploadLib").toString());
+		Lib finishedLib = libServ.finishLib(libRequest.getLib(), libRequest.getWords());
 		
 		return ResponseEntity.ok(finishedLib);
 	}

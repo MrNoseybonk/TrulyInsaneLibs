@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Lib;
 import com.revature.beans.WordTotals;
+import com.revature.beans.Words;
 
 @Service
 public class LibService 
@@ -80,9 +81,94 @@ public class LibService
 		return totals;
 	}
 	
-	public Lib finishLib(String beggingLib)
+	public Lib finishLib(Lib beggingLib, Words words)
 	{
-		Lib lib = new Lib();
+		Lib lib = beggingLib;
+		StringBuilder workingLib = new StringBuilder();
+		workingLib.append(lib.getLib());
+		
+		String adjectives[] = words.getAdjectives();
+		String adverbs[] = words.getAdverbs();
+		String colors[] = words.getColors();
+		String ings[] = words.getIngs();
+		String nouns[] = words.getNouns();
+		String numbers[] = words.getNumbers();
+		String pasts[] = words.getPasts();
+		String plurals[] = words.getPlurals();
+		String propers[] = words.getPropers();
+		String verbs[] = words.getVerbs();
+		
+		for (int i = 0; i < adjectives.length; i++)
+		{
+			int adjectiveInd = workingLib.indexOf("<adjective>");
+			int adjectiveEnd = adjectiveInd + 11;
+			workingLib.replace(adjectiveInd, adjectiveEnd, adjectives[i]);
+		}
+		
+		for (int i = 0; i < adverbs.length; i++)
+		{
+			int adverbInd = workingLib.indexOf("<adverb>");
+			int adverbEnd = adverbInd + 8;
+			workingLib.replace(adverbInd, adverbEnd, adverbs[i]);
+		}
+		
+		for (int i = 0; i < colors.length; i++)
+		{
+			int colorInd = workingLib.indexOf("<color>");
+			int colorEnd = colorInd + 7;
+			workingLib.replace(colorInd, colorEnd, colors[i]);
+		}
+		
+		for (int i = 0; i < ings.length; i++)
+		{
+			int ingInd = workingLib.indexOf("<ing>");
+			int ingEnd = ingInd + 5;
+			workingLib.replace(ingInd, ingEnd, ings[i]);
+		}
+		
+		for (int i = 0; i < nouns.length; i++)
+		{
+			int nounInd = workingLib.indexOf("<noun>");
+			int nounEnd = nounInd + 6;
+			workingLib.replace(nounInd, nounEnd, nouns[i]);
+		}
+		
+		for (int i = 0; i < numbers.length; i++)
+		{
+			int numberInd = workingLib.indexOf("<number>");
+			int numberEnd = numberInd + 8;
+			workingLib.replace(numberInd, numberEnd, numbers[i]);
+		}
+		
+		for (int i = 0; i < pasts.length; i++)
+		{
+			int pastInd = workingLib.indexOf("<past>");
+			int pastEnd = pastInd + 6;
+			workingLib.replace(pastInd, pastEnd, pasts[i]);
+		}
+		
+		for (int i = 0; i < plurals.length; i++)
+		{
+			int pluralInd = workingLib.indexOf("<plural>");
+			int pluralEnd = pluralInd + 8;
+			workingLib.replace(pluralInd, pluralEnd, plurals[i]);
+		}
+		
+		for (int i = 0; i < propers.length; i++)
+		{
+			int properInd = workingLib.indexOf("<proper>");
+			int properEnd = properInd + 8;
+			workingLib.replace(properInd, properEnd, propers[i]);
+		}
+		
+		for (int i = 0; i < verbs.length; i++)
+		{
+			int verbInd = workingLib.indexOf("<verb>");
+			int verbEnd = verbInd + 6;
+			workingLib.replace(verbInd, verbEnd, verbs[i]);
+		}
+		
+		lib.setLib(workingLib.toString());
 		return lib;
 	}
 }
