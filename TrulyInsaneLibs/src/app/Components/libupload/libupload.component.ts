@@ -15,54 +15,34 @@ export class LibuploadComponent implements OnInit {
 
   totals: any;
 
-  nounsArr: any[] = [{
-    noun: ''
-  }];
+  nounsArr: any[];
   nouns: string[];
 
-  pluralsArr: any[] = [{
-    noun: ''
-  }];
+  pluralsArr: any[];
   plurals: string[];
 
-  verbsArr: any[] = [{
-    verb: ''
-  }];
+  verbsArr: any[];
   verbs: string[];
 
-  adjArr: any[] = [{
-    adjective: ''
-  }];
+  adjArr: any[];
   adjectives: string[];
 
-  colorsArr: any[] = [{
-    color: ''
-  }];
+  colorsArr: any[];
   colors: string[];
 
-  ingsArr: any[] = [{
-    ing: ''
-  }];
+  ingsArr: any[];
   ings: string[];
 
-  adverbsArr: any[] = [{
-    adverb: ''
-  }];
+  adverbsArr: any[];
   adverbs: string[];
 
-  propArr: any[] = [{
-    proper: ''
-  }];
+  propArr: any[];
   propers: string[];
 
-  numbArr: any[] = [{
-    number: ''
-  }];
+  numbArr: any[];
   numbers: string[];
 
-  pastsArr: any[] = [{
-    past: ''
-  }];
+  pastsArr: any[];
   pasts: string[];
 
   words: Words;
@@ -101,125 +81,85 @@ export class LibuploadComponent implements OnInit {
     this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
 
+      this.nounsArr = new Array();
+      this.pluralsArr = new Array();
+      this.verbsArr = new Array();
+      this.adjArr = new Array();
+      this.colorsArr = new Array();
+      this.ingsArr = new Array();
+      this.adverbsArr = new Array();
+      this.propArr = new Array();
+      this.numbArr = new Array();
+      this.pastsArr = new Array();
 
-      for (let i = 0; i < (this.totals.nouns - 1); i++)
+      for (let i = 0; i < (this.totals.nouns); i++)
       {
         this.nounsArr.push({
           noun: ''
         });
       }
 
-      if (this.totals.nouns === 0)
-      {
-        this.nounsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.plurals - 1); i++)
+      for (let i = 0; i < (this.totals.plurals); i++)
       {
         this.pluralsArr.push({
           plural: ''
         });
       }
 
-      if (this.totals.plurals === 0)
-      {
-        this.pluralsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.verbs - 1); i++)
+      for (let i = 0; i < (this.totals.verbs); i++)
       {
         this.verbsArr.push({
           verb: ''
         });
       }
 
-      if (this.totals.verbs === 0)
-      {
-        this.verbsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.adjectives - 1); i++)
+      for (let i = 0; i < (this.totals.adjectives); i++)
       {
         this.adjArr.push({
           adjective: ''
         });
       }
 
-      if (this.totals.adjectives === 0)
-      {
-        this.adjArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.colors - 1); i++)
+      for (let i = 0; i < (this.totals.colors); i++)
       {
         this.colorsArr.push({
           color: ''
         });
       }
 
-      if (this.totals.colors === 0)
-      {
-        this.colorsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.ings - 1); i++)
+      for (let i = 0; i < (this.totals.ings); i++)
       {
         this.ingsArr.push({
           ing: ''
         });
       }
 
-      if (this.totals.ings === 0)
-      {
-        this.ingsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.adverbs - 1); i++)
+      for (let i = 0; i < (this.totals.adverbs); i++)
       {
         this.adverbsArr.push({
           adverb: ''
         });
       }
 
-      if (this.totals.adverbs === 0)
-      {
-        this.adverbsArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.propers - 1); i++)
+      for (let i = 0; i < (this.totals.propers); i++)
       {
         this.propArr.push({
           proper: ''
         });
       }
 
-      if (this.totals.propers === 0)
-      {
-        this.propArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.numbers - 1); i++)
+      for (let i = 0; i < (this.totals.numbers); i++)
       {
         this.numbArr.push({
           number: ''
         });
       }
 
-      if (this.totals.numbers === 0)
-      {
-        this.totals.numbArr = new Array();
-      }
-
-      for (let i = 0; i < (this.totals.pasts - 1); i++)
+      for (let i = 0; i < (this.totals.pasts); i++)
       {
         this.pastsArr.push({
           past: ''
         });
-      }
-
-      if (this.totals.pasts === 0)
-      {
-        this.pastsArr = new Array();
       }
      } );
   }
