@@ -2,6 +2,7 @@ package com.revature.services;
 
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.Lib;
 import com.revature.beans.WordTotals;
 
 @Service
@@ -77,5 +78,11 @@ public class LibService
 		totals.setPropers(propers);
 		
 		return totals;
+	}
+	
+	public Lib finishLib(String beggingLib)
+	{
+		Lib lib = new Lib();
+		return lib;
 	}
 }

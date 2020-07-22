@@ -5,12 +5,16 @@ import { UrlService } from './url.service';
 import { finalize } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Words } from './Models/words';
+import { Lib } from './Models/lib';
+import { LibRequest } from './Models/lib-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibService {
   private regHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private lib = new Lib();
+  private librequest = new LibRequest();
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
@@ -23,11 +27,15 @@ export class LibService {
     }
   }
 
-  public createLib(words: Words): Observable<any>
+  public createLib(fileContent: string, words: Words): Observable<any>
   {
-    if (words)
+    if (fileContent && words)
     {
-      return this.http.put<any>(this.urlService.getUrl() + 'lib', words, {headers: this.regHeaders, withCredentials: true })
+      this.lib.lib = fileContent;
+      this.librequest.lib = this.lib;
+      this.librequest.words = words;
+
+      return this.http.put<any>(this.urlService.getUrl() + 'lib', this.librequest, {headers: this.regHeaders, withCredentials: true })
         .pipe(map( resp => resp ));
     }
   }

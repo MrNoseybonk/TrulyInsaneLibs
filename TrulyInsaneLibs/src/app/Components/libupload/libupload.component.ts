@@ -183,7 +183,7 @@ export class LibuploadComponent implements OnInit {
 
     //console.log(this.words);
 
-    this.createSub = this.libService.createLib(this.words).subscribe((resp) => {
+    this.createSub = this.libService.createLib(this.formGroup.get('file').value, this.words).subscribe((resp) => {
       this.finishedLib = resp.lib;
     });
   }

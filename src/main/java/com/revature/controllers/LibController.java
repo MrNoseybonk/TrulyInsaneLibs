@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Lib;
+import com.revature.beans.LibRequest;
 import com.revature.beans.WordTotals;
-import com.revature.beans.Words;
 import com.revature.services.LibService;
 
 @RestController
@@ -28,23 +28,23 @@ public class LibController
 	}
 	
 	@PostMapping
-	public ResponseEntity<WordTotals> uploadLib(HttpSession session, @RequestBody String lib)
+	public ResponseEntity<WordTotals> uploadLib(@RequestBody String lib)
 	{
 		WordTotals totals = libServ.countTotals(lib);
-		session.setAttribute("uploadlib", lib);
 
 		return ResponseEntity.ok(totals);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Lib> sendLib(HttpSession session, @RequestBody Words words)
+	public ResponseEntity<Lib> sendLib(HttpSession session, @RequestBody LibRequest libRequest)
 	{
-		Lib lib = new Lib();
+		Lib finishedLib = new Lib();
 		
-		System.out.println(words);
+		finishedLib = libRequest.getLib();
+		System.out.println(libRequest.getWords());
 		
-		lib.setLib("Testing.");
+		//lib = libServ.finishLib(session.getAttribute("uploadLib").toString());
 		
-		return ResponseEntity.ok(lib);
+		return ResponseEntity.ok(finishedLib);
 	}
 }
