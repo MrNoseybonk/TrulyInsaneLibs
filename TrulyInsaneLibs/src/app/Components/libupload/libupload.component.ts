@@ -12,26 +12,36 @@ export class LibuploadComponent implements OnInit {
   private libSub: Subscription;
 
   totals: any;
-  nouns: number;
-  nounsArr: number[];
-  plurals: number;
+  nounsTotal: number;
+  nounsArr: any[];
+  nouns: string[];
+  pluralsTotal: number;
   pluralsArr: number[];
-  verbs: number;
+  plurals: string[];
+  verbsTotal: number;
   verbsArr: number[];
-  adjectives: number;
+  verbs: string[];
+  adjectivesTotal: number;
   adjArr: number[];
-  colors: number;
+  adjectives: string[];
+  colorsTotal: number;
   colorsArr: number[];
-  ings: number;
+  colors: string[];
+  ingsTotal: number;
   ingsArr: number[];
-  adverbs: number;
+  ings: string[];
+  adverbsTotal: number;
   adverbsArr: number[];
-  propers: number;
+  adverbs: string[];
+  propersTotal: number;
   propArr: number[];
-  numbers: number;
+  propers: string[];
+  numbersTotal: number;
   numbArr: number[];
-  pasts: number;
+  numbers: string[];
+  pastsTotal: number;
   pastsArr: number[];
+  pasts: string[];
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
@@ -42,16 +52,16 @@ export class LibuploadComponent implements OnInit {
   constructor(private fb: FormBuilder, private fileUploadService: FileuploadService) { }
 
   ngOnInit(): void {
-    this.nouns = 0;
-    this.plurals = 0;
-    this.verbs = 0;
-    this.adjectives = 0;
-    this.colors = 0;
-    this.ings = 0;
-    this.adverbs = 0;
-    this.propers = 0;
-    this.numbers = 0;
-    this.pasts = 0;
+    this.nounsTotal = 0;
+    this.pluralsTotal = 0;
+    this.verbsTotal = 0;
+    this.adjectivesTotal = 0;
+    this.colorsTotal = 0;
+    this.ingsTotal = 0;
+    this.adverbsTotal = 0;
+    this.propersTotal = 0;
+    this.numbersTotal = 0;
+    this.pastsTotal = 0;
   }
 
   public onFileChange(event)
@@ -75,18 +85,19 @@ export class LibuploadComponent implements OnInit {
   {
     this.libSub = this.fileUploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
-      this.nouns = this.totals.nouns;
-      this.plurals = this.totals.plurals;
-      this.verbs = this.totals.verbs;
-      this.adjectives = this.totals.adjectives;
-      this.colors = this.totals.colors;
-      this.ings = this.totals.ings;
-      this.adverbs = this.totals.adverbs;
-      this.propers = this.totals.propers;
-      this.numbers = this.totals.numbers;
-      this.pasts = this.totals.pasts;
+      this.nounsTotal = this.totals.nouns;
+      this.pluralsTotal = this.totals.plurals;
+      this.verbsTotal = this.totals.verbs;
+      this.adjectivesTotal = this.totals.adjectives;
+      this.colorsTotal = this.totals.colors;
+      this.ingsTotal = this.totals.ings;
+      this.adverbsTotal = this.totals.adverbs;
+      this.propersTotal = this.totals.propers;
+      this.numbersTotal = this.totals.numbers;
+      this.pastsTotal = this.totals.pasts;
 
-      this.nounsArr = [];
+      console.log('onSubmit nounsTotal: ' + this.nounsTotal);
+      this.nounsArr = new Array(this.nounsTotal);
       this.pluralsArr = [];
       this.verbsArr = [];
       this.adjArr = [];
@@ -97,55 +108,73 @@ export class LibuploadComponent implements OnInit {
       this.numbArr = [];
       this.pastsArr = [];
 
-      for (let i = 0; i < this.nouns; i++)
+      for (let i = 0; i < this.pluralsTotal; i++)
       {
-        this.nounsArr.push(1);
+        this.pluralsArr.push(i);
       }
 
-      for (let i = 0; i < this.plurals; i++)
+      for (let i = 0; i < this.verbsTotal; i++)
       {
-        this.pluralsArr.push(1);
+        this.verbsArr.push(i);
       }
 
-      for (let i = 0; i < this.verbs; i++)
+      for (let i = 0; i < this.adjectivesTotal; i++)
       {
-        this.verbsArr.push(1);
+        this.adjArr.push(i);
       }
 
-      for (let i = 0; i < this.adjectives; i++)
+      for (let i = 0; i < this.colorsTotal; i++)
       {
-        this.adjArr.push(1);
+        this.colorsArr.push(i);
       }
 
-      for (let i = 0; i < this.colors; i++)
+      for (let i = 0; i < this.ingsTotal; i++)
       {
-        this.colorsArr.push(1);
+        this.ingsArr.push(i);
       }
 
-      for (let i = 0; i < this.ings; i++)
+      for (let i = 0; i < this.adverbsTotal; i++)
       {
-        this.ingsArr.push(1);
+        this.adverbsArr.push(i);
       }
 
-      for (let i = 0; i < this.adverbs; i++)
+      for (let i = 0; i < this.propersTotal; i++)
       {
-        this.adverbsArr.push(1);
+        this.propArr.push(i);
       }
 
-      for (let i = 0; i < this.propers; i++)
+      for (let i = 0; i < this.numbersTotal; i++)
       {
-        this.propArr.push(1);
+        this.numbArr.push(i);
       }
 
-      for (let i = 0; i < this.numbers; i++)
+      for (let i = 0; i < this.pastsTotal; i++)
       {
-        this.numbArr.push(1);
-      }
-
-      for (let i = 0; i < this.pasts; i++)
-      {
-        this.pastsArr.push(1);
+        this.pastsArr.push(i);
       }
      } );
+  }
+
+  onCreate()
+  {
+    alert('Create pressed!');
+    this.nouns = new Array(this.nounsTotal);
+    this.plurals = [];
+    this.verbs = [];
+    this.adjectives = [];
+    this.colors = [];
+    this.ings = [];
+    this.adverbs = [];
+    this.propers = [];
+    this.numbers = [];
+    this.pasts = [];
+
+    for (let i = 0; i < this.nounsTotal; i++)
+    {
+      const nounBox = document.getElementById('noun_' + i);
+      this.nouns[i] = nounBox.value;
+    }
+
+    console.log(this.nouns);
   }
 }

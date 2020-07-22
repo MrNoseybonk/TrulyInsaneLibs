@@ -8,32 +8,33 @@
     </form>
     <span id="fileName" *ngIf=fileName>{{fileName}}</span>
 </div>
-<div class="inputs">
-    <div class="nouns" *ngFor="let number of nounsArr">
-        <label>Noun</label><input class="userInput" type="text">
+<div class="inputs" *ngIf=totals>
+    <div class="nouns" *ngFor="let number of nounsArr; let i = index">
+        <label>Noun</label><input class="nounInput" type="text" id="noun_{{i}}">
     </div>
     <div class="plurals" *ngFor="let number of verbsArr">
-        <label>Verb</label><input class="userInput" type="text">
+        <label>Verb</label><input class="verbInput" type="text">
     </div>
     <div class="adjectives" *ngFor="let number of adjArr">
-        <label>Adjective</label><input class="userInput" type="text">
+        <label>Adjective</label><input class="adjInput" type="text">
     </div>
     <div class="colors" *ngFor="let number of colorsArr">
-        <label>Color</label><input class="userInput" type="text">
+        <label>Color</label><input class="colorInput" type="text">
     </div>
     <div class="ings" *ngFor="let number of ingsArr">
-        <label>Ing Verb</label><input class="userInput" type="text">
+        <label>Ing Verb</label><input class="ingInput" type="text">
     </div>
     <div class="adverbs" *ngFor="let number of adverbsArr">
-        <label>Adverb</label><input class="userInput" type="text">
+        <label>Adverb</label><input class="adverbInput" type="text">
     </div>
     <div class="propers" *ngFor="let number of propArr">
-        <label>Proper Noun</label><input class="userInput" type="text">
+        <label>Proper Noun</label><input class="propInput" type="text">
     </div>
     <div class="numbers" *ngFor="let number of numbArr">
-        <label>Number</label><input class="userInput" type="text">
+        <label>Number</label><input class="numbInput" type="number">
     </div>
     <div class="pasts" *ngFor="let number of pastsArr">
-        <label>Past Tense Verb</label><input class="userInput" type="text">
+        <label>Past Tense Verb</label><input class="pastInput" type="text">
     </div>
+    <button type="button" (click)="onCreate()">Create Insane Lib</button>
 </div>
