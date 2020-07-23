@@ -10,4 +10,6 @@ export class Words
     propers: string[];
     numbers: string[];
     pasts: string[];
+    foods: string[];
+    liquids: string[];
 }

@@ -46,6 +46,12 @@ export class LibuploadComponent implements OnInit {
   pastsArr: any[];
   pasts: string[];
 
+  foodsArr: any[];
+  foods: string[];
+
+  liquidsArr: any[];
+  liquids: string[];
+
   words: Words;
   finishedLib: any;
 
@@ -92,6 +98,10 @@ export class LibuploadComponent implements OnInit {
       this.propArr = new Array();
       this.numbArr = new Array();
       this.pastsArr = new Array();
+      this.foodsArr = new Array();
+      this.liquidsArr = new Array();
+
+      // console.log(this.totals);
 
       for (let i = 0; i < (this.totals.nouns); i++)
       {
@@ -162,6 +172,20 @@ export class LibuploadComponent implements OnInit {
           past: ''
         });
       }
+
+      for (let i = 0; i < (this.totals.foods); i++)
+      {
+        this.foodsArr.push({
+          food: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.liquids); i++)
+      {
+        this.liquidsArr.push({
+          liquid: ''
+        });
+      }
      } );
 
     const inputs = document.getElementById('inputs');
@@ -191,6 +215,8 @@ export class LibuploadComponent implements OnInit {
     this.propers = new Array(this.totals.propers);
     this.numbers = new Array(this.totals.numbers);
     this.pasts = new Array(this.totals.pasts);
+    this.foods = new Array(this.totals.foods);
+    this.liquids = new Array(this.totals.liquids);
 
     const inputs = document.getElementById('inputs');
     const finishedLib = document.getElementById('finishedLib');
@@ -247,6 +273,16 @@ export class LibuploadComponent implements OnInit {
       this.pasts[i] = this.pastsArr[i].past;
     }
 
+    for (let i = 0; i < this.totals.foods; i++)
+    {
+      this.foods[i] = this.foodsArr[i].food;
+    }
+
+    for (let i = 0; i < this.totals.liquids; i++)
+    {
+      this.liquids[i] = this.liquidsArr[i].liquid;
+    }
+
     // console.log(this.nouns);
     // console.log(this.plurals);
     // console.log(this.verbs);
@@ -257,6 +293,8 @@ export class LibuploadComponent implements OnInit {
     // console.log(this.propers);
     // console.log(this.numbers);
     // console.log(this.pasts);
+    // console.log(this.foods);
+    // console.log(this.liquids);
 
     this.words.nouns = this.nouns;
     this.words.plurals = this.plurals;
@@ -268,6 +306,8 @@ export class LibuploadComponent implements OnInit {
     this.words.propers = this.propers;
     this.words.numbers = this.numbers;
     this.words.pasts = this.pasts;
+    this.words.foods = this.foods;
+    this.words.liquids = this.liquids;
 
     // console.log(this.words);
 

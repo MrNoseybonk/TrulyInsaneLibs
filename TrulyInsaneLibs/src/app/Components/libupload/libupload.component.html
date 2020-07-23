@@ -38,6 +38,12 @@
     <div class="pasts" *ngFor="let past of pastsArr; let i = index">
         <label>Past Tense Verb</label><input class="pastInput" type="text" id="past_{{i}}" [(ngModel)]=past.past>
     </div>
+    <div class="foods" *ngFor="let food of foodsArr; let i = index">
+        <label>Food</label><input class="foodInput" type="text" id="food_{{i}}" [(ngModel)]=food.food>
+    </div>
+    <div class="liquids" *ngFor="let liquid of liquidsArr; let i = index">
+        <label>Liquid</label><input class="liquidInput" type="text" id="liquid_{{i}}" [(ngModel)]=liquid.liquid>
+    </div>
     <button type="button" (click)="onCreate()">Create Insane Lib</button>
 </div>
 <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>

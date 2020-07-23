@@ -23,7 +23,9 @@ public class LibService
 		Integer propers = 0;
 		Integer numbers = 0;
 		Integer pasts = 0;
-		String splitted[] = lib.split(" |,|\\.|-|:|\\R");
+		Integer foods = 0;
+		Integer liquids = 0;
+		String splitted[] = lib.split(" |;|,|\\.|-|:|\\R");
 		
 		for (int i = 0; i < splitted.length; i++)
 		{
@@ -62,6 +64,12 @@ public class LibService
 				case "<past>":
 					pasts++;
 					break;
+				case "<food>":
+					foods++;
+					break;
+				case "<liquid>":
+					liquids++;
+					break;
 				default:
 					break;
 			}
@@ -77,6 +85,8 @@ public class LibService
 		totals.setNumbers(numbers);
 		totals.setPasts(pasts);
 		totals.setPropers(propers);
+		totals.setFoods(foods);
+		totals.setLiquids(liquids);
 		
 		return totals;
 	}
@@ -97,6 +107,8 @@ public class LibService
 		String plurals[] = words.getPlurals();
 		String propers[] = words.getPropers();
 		String verbs[] = words.getVerbs();
+		String foods[] = words.getFoods();
+		String liquids[] = words.getLiquids();
 		
 		for (int i = 0; i < adjectives.length; i++)
 		{
@@ -166,6 +178,20 @@ public class LibService
 			int verbInd = workingLib.indexOf("<verb>");
 			int verbEnd = verbInd + 6;
 			workingLib.replace(verbInd, verbEnd, verbs[i]);
+		}
+		
+		for (int i = 0; i < foods.length; i++)
+		{
+			int foodInd = workingLib.indexOf("<food>");
+			int foodEnd = foodInd + 6;
+			workingLib.replace(foodInd, foodEnd, foods[i]);
+		}
+		
+		for (int i = 0; i < liquids.length; i++)
+		{
+			int liquidInd = workingLib.indexOf("<liquid>");
+			int liquidEnd = liquidInd + 8;
+			workingLib.replace(liquidInd, liquidEnd, liquids[i]);
 		}
 		
 		lib.setLib(workingLib.toString());
