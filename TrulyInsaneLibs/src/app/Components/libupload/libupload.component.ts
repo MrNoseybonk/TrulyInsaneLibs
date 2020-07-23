@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-libupload',
@@ -162,6 +163,19 @@ export class LibuploadComponent implements OnInit {
         });
       }
      } );
+
+    const inputs = document.getElementById('inputs');
+    const finishedLib = document.getElementById('finishedLib');
+
+    if (inputs != null)
+    {
+      inputs.style.display = 'block';
+    }
+
+    if (finishedLib != null)
+    {
+      finishedLib.style.display = 'none';
+    }
   }
 
   onCreate()
@@ -177,6 +191,9 @@ export class LibuploadComponent implements OnInit {
     this.propers = new Array(this.totals.propers);
     this.numbers = new Array(this.totals.numbers);
     this.pasts = new Array(this.totals.pasts);
+
+    const inputs = document.getElementById('inputs');
+    const finishedLib = document.getElementById('finishedLib');
 
     this.words = new Words();
 
@@ -254,8 +271,15 @@ export class LibuploadComponent implements OnInit {
 
     // console.log(this.words);
 
+    inputs.style.display = 'none';
+
     this.createSub = this.libService.createLib(this.formGroup.get('file').value, this.words).subscribe((resp) => {
       this.finishedLib = resp.lib;
     });
+
+    if (finishedLib != null)
+    {
+      finishedLib.style.display = 'block';
+    }
   }
 }

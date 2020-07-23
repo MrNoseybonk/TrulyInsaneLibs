@@ -6,9 +6,8 @@
         <input type="file" accept=".txt" (change)="onFileChange($event)" />
         <input type="submit" [disabled]="formGroup.invalid" value="upload" />
     </form>
-    <span id="fileName" *ngIf=fileName>{{fileName}}</span>
 </div>
-<div class="inputs" *ngIf=totals>
+<div class="inputs" id="inputs" *ngIf=totals>
     <div class="nouns" *ngFor="let noun of nounsArr; let i = index">
         <label>Noun</label><input class="nounInput" type="text" id="noun_{{i}}" [(ngModel)]=noun.noun>
     </div>
@@ -41,6 +40,6 @@
     </div>
     <button type="button" (click)="onCreate()">Create Insane Lib</button>
 </div>
-<div class="finishedLib" *ngIf=finishedLib>
+<div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
     <p>{{finishedLib}}</p>
 </div>
