@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { analyzeAndValidateNgModules, ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-libupload',
@@ -265,7 +265,18 @@ export class LibuploadComponent implements OnInit {
 
     for (let i = 0; i < this.totals.numbers; i++)
     {
-      this.numbers[i] = this.numbArr[i].number;
+      if (this.numbArr[i].number > 1000000000000)
+      {
+        this.numbers[i] = '1000000000000';
+      }
+      else if (this.numbArr[i].number < -1000000000000)
+      {
+        this.numbers[i] = '-1000000000000';
+      }
+      else
+      {
+        this.numbers[i] = this.numbArr[i].number;
+      }
     }
 
     for (let i = 0; i < this.totals.pasts; i++)
