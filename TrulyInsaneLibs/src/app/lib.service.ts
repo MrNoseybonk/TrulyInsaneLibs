@@ -17,15 +17,6 @@ export class LibService {
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
-  public upload(fileName: string, fileContent: string): Observable<any> {
-    if (fileName && fileContent) {
-      const body = fileContent;
-      return this.http.post<any>(this.urlService.getUrl() + 'lib', body,
-        {headers: this.regHeaders, withCredentials: true })
-        .pipe(map( resp => resp ));
-    }
-  }
-
   public createLib(fileContent: string, words: Words): Observable<any>
   {
     if (fileContent && words)

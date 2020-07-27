@@ -11,13 +11,15 @@ import { FilecreateComponent } from './Components/filecreate/filecreate.componen
 import { LibService } from './lib.service';
 import { LoginService } from './login.service';
 import { UrlService } from './url.service';
+import { FileuploadComponent } from './Components/fileupload/fileupload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainNavBarComponent,
-    FilecreateComponent
+    FilecreateComponent,
+    FileuploadComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
