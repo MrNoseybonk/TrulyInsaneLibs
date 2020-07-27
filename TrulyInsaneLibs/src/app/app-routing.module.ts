@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './Components/login/login.component';
-import { LibuploadComponent } from './Components/libupload/libupload.component';
+import { FilecreateComponent } from './Components/filecreate/filecreate.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'upload', component: LibuploadComponent },
+  { path: 'filecreate', component: FilecreateComponent },
   { path: '*', redirectTo: '' }
 ];
 
