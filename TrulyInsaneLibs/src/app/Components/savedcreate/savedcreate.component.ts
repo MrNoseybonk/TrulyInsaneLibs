@@ -83,7 +83,7 @@ export class SavedcreateComponent implements OnInit {
     // console.log(this.formGroup.get('selectedLib').value);
     this.getSub = this.savedCreateService.getLib(this.formGroup.get('selectedLib').value).subscribe((resp) => {
       this.startingLib = resp.lib;
-      console.log(this.startingLib);
+      // console.log(this.startingLib);
 
       this.uploadSub = this.uploadService.upload(resp.libName, this.startingLib).subscribe((resp2) => {
         this.totals = resp2;

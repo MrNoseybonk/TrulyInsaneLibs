@@ -1,0 +1,64 @@
+.input
+{
+    width: 210px;
+}
+
+.nounLabel
+{
+    padding-right: 75px;
+}
+
+.pluralLabel
+{
+    padding-right: 33px;
+}
+
+.verbLabel
+{
+    padding-right: 80px;
+}
+
+.adjLabel
+{
+    padding-right: 48px;
+}
+
+.colorLabel
+{
+    padding-right: 74px;
+}
+
+.ingLabel
+{
+    padding-right: 56px;
+}
+
+.adverbLabel
+{
+    padding-right: 63px;;
+}
+
+.propLabel
+{
+    padding-right: 28px;
+}
+
+.numbLabel
+{
+    padding-right: 58px;
+}
+
+.pastLabel
+{
+    padding-right: 10px;
+}
+
+.foodLabel
+{
+    padding-right: 78px;
+}
+
+.liquidLabel
+{
+    padding-right: 69px;
+}
