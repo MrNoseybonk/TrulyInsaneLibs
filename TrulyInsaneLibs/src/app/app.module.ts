@@ -12,6 +12,7 @@ import { LibService } from './lib.service';
 import { LoginService } from './login.service';
 import { UrlService } from './url.service';
 import { FileuploadComponent } from './Components/fileupload/fileupload.component';
+import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FileuploadComponent } from './Components/fileupload/fileupload.componen
     LoginComponent,
     MainNavBarComponent,
     FilecreateComponent,
-    FileuploadComponent
+    FileuploadComponent,
+    SavedcreateComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

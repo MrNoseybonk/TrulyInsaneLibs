@@ -25,7 +25,7 @@ export class FileuploadService {
   }
 
   public uploadTemplate(fileName: string, libName: string, fileContent: string): Observable<any> {
-    // if (fileName && libName && fileContent) {
+     if (fileName && libName && fileContent) {
       this.uploadRequest.libName = libName;
       this.uploadRequest.lib = fileContent;
       console.log(this.uploadRequest);
@@ -33,5 +33,5 @@ export class FileuploadService {
       {headers: this.regHeaders, withCredentials: true })
       .pipe(map( resp => resp ));
     }
-  // }
+   }
 }
