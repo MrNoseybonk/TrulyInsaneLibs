@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SavedcreateService } from 'src/app/savedcreate.service'
+import { FormBuilder, Validators } from '@angular/forms';
+import { SavedcreateService } from 'src/app/savedcreate.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,10 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class SavedcreateComponent implements OnInit {
   libChoices: any[];
-  selectedLib: string;
   private libSub: Subscription;
 
-  constructor(private savedCreateService: SavedcreateService) { }
+  public formGroup = this.fb.group({
+    selectedLib: [null, Validators.required]
+  });
+
+  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService) { }
 
   ngOnInit(): void {
     this.fillSelector();
@@ -23,5 +27,10 @@ export class SavedcreateComponent implements OnInit {
     this.libSub = this.savedCreateService.getLibs().subscribe((resp) => {
       this.libChoices = resp;
     });
+  }
+
+  public onSubmit()
+  {
+    console.log(this.formGroup.get('selectedLib').value);
   }
 }

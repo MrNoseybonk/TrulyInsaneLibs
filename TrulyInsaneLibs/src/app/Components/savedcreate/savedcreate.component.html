@@ -2,7 +2,10 @@
     <p>Select a template from the list to pick which lib template you want to use.</p>
 </div>
 <div class="selector">
-    <select size="10" id="libList" [ngModel]="selectedLib">
-        <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
-    </select>
+    <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
+        <select size="10" id="libList" formControlName="selectedLib">
+            <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
+        </select>
+        <input type="submit" [disabled]="formGroup.invalid" value="Select Template" />
+    </form>
 </div>
