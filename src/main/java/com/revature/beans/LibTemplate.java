@@ -10,8 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "lib_template")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class LibTemplate
 {
 	@Id
@@ -21,7 +24,7 @@ public class LibTemplate
 	private String libName;
 	@Column
 	private String lib;
-//	@ManyToOne(fetch=FetchType.LAZY, targetEntity = Person.class)
+//	@ManyToOne(fetch=FetchType.EAGER, targetEntity = Person.class)
 //	@JoinColumn(name="id", insertable=false, updatable=false)
 //	private Integer uploaderId;
 	

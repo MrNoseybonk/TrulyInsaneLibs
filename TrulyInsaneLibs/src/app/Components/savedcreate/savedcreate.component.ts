@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SavedcreateService } from 'src/app/savedcreate.service'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-savedcreate',
@@ -8,15 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class SavedcreateComponent implements OnInit {
   libChoices: any[];
   selectedLib: string;
+  private libSub: Subscription;
 
-  constructor() { }
+  constructor(private savedCreateService: SavedcreateService) { }
 
   ngOnInit(): void {
-    this.libChoices = [
-      {id: 1, libName: 'Test'},
-      {id: 2, libName: 'Recipe'}
-    ];
-    console.log(this.libChoices);
+    this.fillSelector();
   }
 
+  public fillSelector()
+  {
+    this.libSub = this.savedCreateService.getLibs().subscribe((resp) => {
+      this.libChoices = resp;
+    });
+  }
 }
