@@ -14,8 +14,13 @@ export class SavedcreateService {
 
   public getLibs(): Observable<any>
   {
-
     return this.http.get<any>(this.urlService.getUrl() + 'file/all', {headers: this.regHeaders, withCredentials: true })
       .pipe(map( resp => resp ));
+  }
+
+  public getLib(id: string): Observable<any>
+  {
+    return this.http.get<any>(this.urlService.getUrl() + 'file/' + id, {headers: this.regHeaders, withCredentials: true })
+      .pipe(map( resp => resp));
   }
 }

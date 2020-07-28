@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +34,10 @@ public class FileController
 		return ResponseEntity.ok(templateId);
 	}
 	
-	@GetMapping
-	public ResponseEntity<LibTemplate> getLibTemplate(@RequestBody TemplateRequest t)
+	@GetMapping("/{id}")
+	public ResponseEntity<LibTemplate> getLibTemplate(@PathVariable("id") Integer id)
 	{
-		LibTemplate lib = fileServ.getLibTemplate(t.getId());
+		LibTemplate lib = fileServ.getLibTemplate(id);
 		return ResponseEntity.ok(lib);
 	}
 	

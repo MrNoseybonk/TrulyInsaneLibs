@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class SavedcreateComponent implements OnInit {
   libChoices: any[];
   private libSub: Subscription;
+  private getSub: Subscription;
 
   public formGroup = this.fb.group({
     selectedLib: [null, Validators.required]
@@ -32,5 +33,8 @@ export class SavedcreateComponent implements OnInit {
   public onSubmit()
   {
     console.log(this.formGroup.get('selectedLib').value);
+    this.getSub = this.savedCreateService.getLib(this.formGroup.get('selectedLib').value).subscribe((resp) => {
+      console.log(resp);
+    });
   }
 }
