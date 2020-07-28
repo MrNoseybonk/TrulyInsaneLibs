@@ -26,16 +26,7 @@ export class FileuploadService {
 
   public uploadTemplate(fileName: string, libName: string, fileContent: string): Observable<any> {
     // if (fileName && libName && fileContent) {
-      const blob = new Blob([fileContent], {type: 'text/plain'});
-      const reader = new FileReader();
-      let base64data;
-      reader.readAsDataURL(blob);
-      reader.onloadend = () => {
-        base64data = reader.result;
-        console.log(base64data);
-      };
-
-      this.uploadRequest.libName = 'test';
+      this.uploadRequest.libName = libName;
       this.uploadRequest.lib = fileContent;
       console.log(this.uploadRequest);
       return this.http.post<any>(this.urlService.getUrl() + 'file', this.uploadRequest,

@@ -13,11 +13,10 @@ export class FileuploadComponent implements OnInit {
 
   public formGroup = this.fb.group({
     file: [null, Validators.required],
-    libName: ['LibName']
+    libName: ['']
   });
 
   public fileName;
-  public libName;
 
   constructor(private fb: FormBuilder, private uploadService: FileuploadService) { }
 
@@ -45,9 +44,8 @@ export class FileuploadComponent implements OnInit {
 
   public onSubmit(): void
   {
-    // tslint:disable-next-line: max-line-length
-    // this.uploadSub = this.uploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => { console.log (resp); });
-    this.uploadSub = this.uploadService.uploadTemplate(this.fileName, this.libName, this.formGroup.get('file').value).subscribe((resp) => {
+    this.uploadSub = this.uploadService.uploadTemplate(this.fileName, this.formGroup.get('libName').value, this.formGroup.get('file').value)
+    .subscribe((resp) => {
       console.log(resp);
     });
   }

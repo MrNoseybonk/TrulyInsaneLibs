@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,29 +16,28 @@ public class LibTemplate
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column(name = "lib_name")
 	private String libName;
 	@Column
 	private String lib;
-//	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-//	@JoinTable(name="person",joinColumns=@JoinColumn(name="uploader_id"),
-//			inverseJoinColumns=@JoinColumn(name="id"))
-//	private int personId;
+//	@ManyToOne(fetch=FetchType.LAZY, targetEntity = Person.class)
+//	@JoinColumn(name="id", insertable=false, updatable=false)
+//	private Integer uploaderId;
 	
 	public LibTemplate()
 	{
 		id = 0;
 		libName = "";
 		lib = null;
-		// personId = 0;
+		//uploaderId = 0;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -59,12 +57,12 @@ public class LibTemplate
 		this.lib = string;
 	}
 
-//	public int getPersonId() {
-//		return personId;
+//	public int getUploaderId() {
+//		return uploaderId;
 //	}
 //
-//	public void setPersonId(int personId) {
-//		this.personId = personId;
+//	public void setUploaderId(Integer uploaderId) {
+//		this.uploaderId = uploaderId;
 //	}
 
 	@Override
