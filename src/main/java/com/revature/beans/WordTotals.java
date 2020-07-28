@@ -12,6 +12,8 @@ public class WordTotals
 	private Integer propers; // proper nouns like a persons name
 	private Integer numbers;
 	private Integer pasts; // past tense verbs like ran
+	private Integer foods;
+	private Integer liquids;
 	
 	public WordTotals()
 	{
@@ -25,6 +27,8 @@ public class WordTotals
 		propers = 0;
 		numbers = 0;
 		pasts = 0;
+		foods = 0;
+		liquids = 0;
 	}
 	
 	public Integer getPlurals() {
@@ -107,10 +111,26 @@ public class WordTotals
 		this.adjectives = adjectives;
 	}
 	
+	public Integer getFoods() {
+		return foods;
+	}
+
+	public void setFoods(Integer foods) {
+		this.foods = foods;
+	}
+
+	public Integer getLiquids() {
+		return liquids;
+	}
+
+	public void setLiquids(Integer liquids) {
+		this.liquids = liquids;
+	}
+
 	@Override
 	public String toString() {
 		return "WordTotals [nouns=" + nouns + ", plurals=" + plurals + ", verbs=" + verbs + ", adjectives=" + adjectives
 				+ ", colors=" + colors + ", ings=" + ings + ", adverbs=" + adverbs + ", propers=" + propers
-				+ ", numbers=" + numbers + ", pasts=" + pasts + "]";
+				+ ", numbers=" + numbers + ", pasts=" + pasts + ", foods=" + foods + ", liquids=" + liquids + "]";
 	}
 }

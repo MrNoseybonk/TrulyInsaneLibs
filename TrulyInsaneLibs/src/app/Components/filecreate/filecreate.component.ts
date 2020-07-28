@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
-import { analyzeAndValidateNgModules, ThrowStmt } from '@angular/compiler';
 
 @Component({
-  selector: 'app-libupload',
-  templateUrl: './libupload.component.html',
-  styleUrls: ['./libupload.component.css']
+  selector: 'app-filecreate',
+  templateUrl: './filecreate.component.html',
+  styleUrls: ['./filecreate.component.css']
 })
-export class LibuploadComponent implements OnInit {
+export class FilecreateComponent implements OnInit {
   private libSub: Subscription;
+  private uploadSub: Subscription;
   private createSub: Subscription;
 
   totals: any;
@@ -61,7 +62,7 @@ export class LibuploadComponent implements OnInit {
 
   public fileName;
 
-  constructor(private fb: FormBuilder, private libService: LibService) { }
+  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService) { }
 
   ngOnInit(): void {
   }
@@ -85,7 +86,7 @@ export class LibuploadComponent implements OnInit {
 
   public onSubmit(): void
   {
-    this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
+    this.uploadSub = this.uploadService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
       this.totals = resp;
 
       this.nounsArr = new Array();

@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SavedcreateService } from 'src/app/savedcreate.service';
+import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
-import { analyzeAndValidateNgModules, ThrowStmt } from '@angular/compiler';
 
 @Component({
-  selector: 'app-libupload',
-  templateUrl: './libupload.component.html',
-  styleUrls: ['./libupload.component.css']
+  selector: 'app-savedcreate',
+  templateUrl: './savedcreate.component.html',
+  styleUrls: ['./savedcreate.component.css']
 })
-export class LibuploadComponent implements OnInit {
+export class SavedcreateComponent implements OnInit {
+  libChoices: any[];
   private libSub: Subscription;
+  private getSub: Subscription;
+  private uploadSub: Subscription;
   private createSub: Subscription;
 
   totals: any;
@@ -52,159 +56,155 @@ export class LibuploadComponent implements OnInit {
   liquidsArr: any[];
   liquids: string[];
 
-  words: Words;
+  startingLib: any;
   finishedLib: any;
+  words: Words;
 
   public formGroup = this.fb.group({
-    file: [null, Validators.required]
+    selectedLib: [null, Validators.required]
   });
 
-  public fileName;
-
-  constructor(private fb: FormBuilder, private libService: LibService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
 
   ngOnInit(): void {
+    this.fillSelector();
   }
 
-  public onFileChange(event)
+  public fillSelector()
   {
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      this.fileName = event.target.files[0].name;
-      const [file] = event.target.files;
-      reader.readAsBinaryString(file);
-
-      reader.onload = () => {
-        this.formGroup.patchValue({
-          file: reader.result
-      });
-      };
-    }
+    this.libSub = this.savedCreateService.getLibs().subscribe((resp) => {
+      this.libChoices = resp;
+    });
   }
 
-  public onSubmit(): void
+  public onSubmit()
   {
-    this.libSub = this.libService.upload(this.fileName, this.formGroup.get('file').value).subscribe((resp) => {
-      this.totals = resp;
+    // console.log(this.formGroup.get('selectedLib').value);
+    this.getSub = this.savedCreateService.getLib(this.formGroup.get('selectedLib').value).subscribe((resp) => {
+      this.startingLib = resp.lib;
+      // console.log(this.startingLib);
 
-      this.nounsArr = new Array();
-      this.pluralsArr = new Array();
-      this.verbsArr = new Array();
-      this.adjArr = new Array();
-      this.colorsArr = new Array();
-      this.ingsArr = new Array();
-      this.adverbsArr = new Array();
-      this.propArr = new Array();
-      this.numbArr = new Array();
-      this.pastsArr = new Array();
-      this.foodsArr = new Array();
-      this.liquidsArr = new Array();
+      this.uploadSub = this.uploadService.upload(resp.libName, this.startingLib).subscribe((resp2) => {
+        this.totals = resp2;
 
-      // console.log(this.totals);
+        this.nounsArr = new Array();
+        this.pluralsArr = new Array();
+        this.verbsArr = new Array();
+        this.adjArr = new Array();
+        this.colorsArr = new Array();
+        this.ingsArr = new Array();
+        this.adverbsArr = new Array();
+        this.propArr = new Array();
+        this.numbArr = new Array();
+        this.pastsArr = new Array();
+        this.foodsArr = new Array();
+        this.liquidsArr = new Array();
 
-      for (let i = 0; i < (this.totals.nouns); i++)
+        // console.log(this.totals);
+
+        for (let i = 0; i < (this.totals.nouns); i++)
+        {
+          this.nounsArr.push({
+            noun: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.plurals); i++)
+        {
+          this.pluralsArr.push({
+            plural: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.verbs); i++)
+        {
+          this.verbsArr.push({
+            verb: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.adjectives); i++)
+        {
+          this.adjArr.push({
+            adjective: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.colors); i++)
+        {
+          this.colorsArr.push({
+            color: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.ings); i++)
+        {
+          this.ingsArr.push({
+            ing: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.adverbs); i++)
+        {
+          this.adverbsArr.push({
+            adverb: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.propers); i++)
+        {
+          this.propArr.push({
+            proper: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.numbers); i++)
+        {
+          this.numbArr.push({
+            number: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.pasts); i++)
+        {
+          this.pastsArr.push({
+            past: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.foods); i++)
+        {
+          this.foodsArr.push({
+            food: ''
+          });
+        }
+
+        for (let i = 0; i < (this.totals.liquids); i++)
+        {
+          this.liquidsArr.push({
+            liquid: ''
+          });
+        }
+       } );
+
+      const inputs = document.getElementById('inputs');
+      const finishedLib = document.getElementById('finishedLib');
+
+      if (inputs != null)
       {
-        this.nounsArr.push({
-          noun: ''
-        });
+        inputs.style.display = 'block';
       }
 
-      for (let i = 0; i < (this.totals.plurals); i++)
+      if (finishedLib != null)
       {
-        this.pluralsArr.push({
-          plural: ''
-        });
+        finishedLib.style.display = 'none';
       }
-
-      for (let i = 0; i < (this.totals.verbs); i++)
-      {
-        this.verbsArr.push({
-          verb: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.adjectives); i++)
-      {
-        this.adjArr.push({
-          adjective: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.colors); i++)
-      {
-        this.colorsArr.push({
-          color: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.ings); i++)
-      {
-        this.ingsArr.push({
-          ing: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.adverbs); i++)
-      {
-        this.adverbsArr.push({
-          adverb: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.propers); i++)
-      {
-        this.propArr.push({
-          proper: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.numbers); i++)
-      {
-        this.numbArr.push({
-          number: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.pasts); i++)
-      {
-        this.pastsArr.push({
-          past: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.foods); i++)
-      {
-        this.foodsArr.push({
-          food: ''
-        });
-      }
-
-      for (let i = 0; i < (this.totals.liquids); i++)
-      {
-        this.liquidsArr.push({
-          liquid: ''
-        });
-      }
-     } );
-
-    const inputs = document.getElementById('inputs');
-    const finishedLib = document.getElementById('finishedLib');
-
-    if (inputs != null)
-    {
-      inputs.style.display = 'block';
-    }
-
-    if (finishedLib != null)
-    {
-      finishedLib.style.display = 'none';
-    }
+    });
   }
 
-  onCreate()
+  public onCreate()
   {
-    // alert('Create pressed!');
     this.nouns = new Array(this.totals.nouns);
     this.plurals = new Array(this.totals.plurals);
     this.verbs = new Array(this.totals.verbs);
@@ -324,7 +324,7 @@ export class LibuploadComponent implements OnInit {
 
     inputs.style.display = 'none';
 
-    this.createSub = this.libService.createLib(this.formGroup.get('file').value, this.words).subscribe((resp) => {
+    this.createSub = this.libService.createLib(this.startingLib, this.words).subscribe((resp) => {
       this.finishedLib = resp.lib;
     });
 

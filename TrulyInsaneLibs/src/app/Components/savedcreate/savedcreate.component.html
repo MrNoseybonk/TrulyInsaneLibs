@@ -1,10 +1,12 @@
 <div class="intro">
-    <p>Please upload your txt file to be used.</p>
+    <p>Select a template from the list to pick which lib template you want to use.</p>
 </div>
-<div class="uploader">
+<div class="selector">
     <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
-        <input type="file" accept=".txt" (change)="onFileChange($event)" />
-        <input type="submit" [disabled]="formGroup.invalid" value="upload" />
+        <select size="10" id="libList" formControlName="selectedLib">
+            <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
+        </select>
+        <input type="submit" [disabled]="formGroup.invalid" value="Select Template" />
     </form>
 </div>
 <div class="inputs" id="inputs" *ngIf=totals>

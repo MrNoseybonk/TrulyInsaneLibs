@@ -7,17 +7,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { MainNavBarComponent } from './Components/main-nav-bar/main-nav-bar.component';
-import { LibuploadComponent } from './Components/libupload/libupload.component';
+import { FilecreateComponent } from './Components/filecreate/filecreate.component';
 import { LibService } from './lib.service';
 import { LoginService } from './login.service';
 import { UrlService } from './url.service';
+import { FileuploadComponent } from './Components/fileupload/fileupload.component';
+import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainNavBarComponent,
-    LibuploadComponent
+    FilecreateComponent,
+    FileuploadComponent,
+    SavedcreateComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

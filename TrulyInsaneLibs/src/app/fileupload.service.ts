@@ -4,12 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlService } from './url.service';
 import { finalize } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { Uploadrequest } from './Models/uploadrequest';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileuploadService {
   private regHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private uploadRequest = new Uploadrequest();
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
@@ -21,4 +23,15 @@ export class FileuploadService {
         .pipe(map( resp => resp ));
     }
   }
+
+  public uploadTemplate(fileName: string, libName: string, fileContent: string): Observable<any> {
+     if (fileName && libName && fileContent) {
+      this.uploadRequest.libName = libName;
+      this.uploadRequest.lib = fileContent;
+      console.log(this.uploadRequest);
+      return this.http.post<any>(this.urlService.getUrl() + 'file', this.uploadRequest,
+      {headers: this.regHeaders, withCredentials: true })
+      .pipe(map( resp => resp ));
+    }
+   }
 }

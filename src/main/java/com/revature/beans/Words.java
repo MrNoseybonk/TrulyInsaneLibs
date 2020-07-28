@@ -14,6 +14,8 @@ public class Words
 	private String propers[]; // proper nouns like a persons name
 	private String numbers[];
 	private String pasts[]; // past tense verbs like ran
+	private String foods[];
+	private String liquids[];
 	
 	public Words()
 	{
@@ -27,6 +29,8 @@ public class Words
 		propers = null;
 		numbers = null;
 		pasts = null;
+		foods = null;
+		liquids = null;
 	}
 	
 	public String[] getNouns() {
@@ -109,12 +113,29 @@ public class Words
 		this.pasts = pasts;
 	}
 	
+	public String[] getFoods() {
+		return foods;
+	}
+
+	public void setFoods(String[] foods) {
+		this.foods = foods;
+	}
+
+	public String[] getLiquids() {
+		return liquids;
+	}
+
+	public void setLiquids(String[] liquids) {
+		this.liquids = liquids;
+	}
+
 	@Override
 	public String toString() {
 		return "Words [nouns=" + Arrays.toString(nouns) + ", plurals=" + Arrays.toString(plurals) + ", verbs="
 				+ Arrays.toString(verbs) + ", adjectives=" + Arrays.toString(adjectives) + ", colors="
 				+ Arrays.toString(colors) + ", ings=" + Arrays.toString(ings) + ", adverbs=" + Arrays.toString(adverbs)
 				+ ", propers=" + Arrays.toString(propers) + ", numbers=" + Arrays.toString(numbers) + ", pasts="
-				+ Arrays.toString(pasts) + "]";
+				+ Arrays.toString(pasts) + ", foods=" + Arrays.toString(foods) + ", liquids=" + Arrays.toString(liquids)
+				+ "]";
 	}
 }
