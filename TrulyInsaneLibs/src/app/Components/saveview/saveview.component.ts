@@ -14,6 +14,7 @@ export class SaveviewComponent implements OnInit {
   finishedLib: string;
   viewsSub: Subscription;
   viewSub: Subscription;
+  deleteSub: Subscription;
 
   loggedUser: Person;
 
@@ -40,6 +41,12 @@ export class SaveviewComponent implements OnInit {
     this.viewSub = this.saveViewService.getView(this.formGroup.get('selectedLib').value).subscribe((resp) => {
       this.finishedLib = resp.lib;
     });
+  }
+
+  onDelete(): void
+  {
+    this.deleteSub = this.saveViewService.deleteView(this.formGroup.get('selectedLib').value).subscribe();
+    window.location.reload();
   }
 
 }

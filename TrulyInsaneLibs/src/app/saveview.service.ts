@@ -23,4 +23,9 @@ export class SaveviewService {
     return this.http.get<any>(this.urlService.getUrl() + 'save/' + id, {headers: this.regHeaders, withCredentials: true })
       .pipe(map( resp => resp ));
   }
+
+  public deleteView(id: string): Observable<any>
+  {
+    return this.http.delete(this.urlService.getUrl() + 'save/delete/' + id, {headers: this.regHeaders, withCredentials: true });
+  }
 }
