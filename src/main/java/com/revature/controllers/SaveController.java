@@ -51,9 +51,16 @@ public class SaveController
 		return ResponseEntity.ok(lib);
 	}
 	
-	@DeleteMapping
-	public void deleteSavedLib(@RequestBody SavedLib s)
+	@DeleteMapping("/delete/{id}")
+	public void deleteSavedLib(@PathVariable("id") Integer id)
 	{
-		saveService.deleteSavedLib(s);
+		SavedLib lib = new SavedLib();
+		lib.setId(id);
+		saveService.deleteSavedLib(lib);
 	}
+//	@DeleteMapping
+//	public void deleteSavedLib(@RequestBody SavedLib s)
+//	{
+//		saveService.deleteSavedLib(s);
+//	}
 }
