@@ -4,7 +4,7 @@
 <div class="selector">
     <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
         <select size="10" id="viewList" formControlName="selectedLib">
-            <option value={{choice.id}} *ngFor="let choice of viewChoices">{{choice.libName}}</option>
+            <option value={{choice.id}} *ngFor="let choice of viewChoices">{{choice.savedName}}</option>
         </select>
         <input type="submit" [disabled]="formGroup.invalid" value="Select Lib" />
     </form>

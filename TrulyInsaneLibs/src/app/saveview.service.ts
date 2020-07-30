@@ -12,9 +12,9 @@ export class SaveviewService {
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
-  public getViews(): Observable<any>
+  public getViews(id: number): Observable<any>
   {
-    return this.http.get<any>(this.urlService.getUrl() + 'file/all', {headers: this.regHeaders, withCredentials: true })
+    return this.http.get<any>(this.urlService.getUrl() + 'save/all/' + id, {headers: this.regHeaders, withCredentials: true })
       .pipe(map( resp => resp ));
   }
 }

@@ -4,6 +4,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { FilecreateComponent } from './Components/filecreate/filecreate.component';
 import { FileuploadComponent } from './Components/fileupload/fileupload.component';
 import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
+import { SaveviewComponent } from './Components/saveview/saveview.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'filecreate', component: FilecreateComponent },
   { path: 'fileupload', component: FileuploadComponent},
   { path: 'savedcreate', component: SavedcreateComponent },
+  { path: 'savedview', component: SaveviewComponent },
   { path: '*', redirectTo: '' }
 ];
 
