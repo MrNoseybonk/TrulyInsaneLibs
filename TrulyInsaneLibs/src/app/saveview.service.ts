@@ -17,4 +17,10 @@ export class SaveviewService {
     return this.http.get<any>(this.urlService.getUrl() + 'save/all/' + id, {headers: this.regHeaders, withCredentials: true })
       .pipe(map( resp => resp ));
   }
+
+  public getView(id: string): Observable<any>
+  {
+    return this.http.get<any>(this.urlService.getUrl() + 'save/' + id, {headers: this.regHeaders, withCredentials: true })
+      .pipe(map( resp => resp ));
+  }
 }

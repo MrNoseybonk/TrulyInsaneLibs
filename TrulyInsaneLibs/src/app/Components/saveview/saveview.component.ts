@@ -12,6 +12,7 @@ import { Person } from 'src/app/Models/person';
 export class SaveviewComponent implements OnInit {
   viewChoices: any[];
   finishedLib: string;
+  viewsSub: Subscription;
   viewSub: Subscription;
 
   loggedUser: Person;
@@ -29,14 +30,16 @@ export class SaveviewComponent implements OnInit {
   public fillSelector()
   {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.viewSub = this.saveViewService.getViews(this.loggedUser.id).subscribe((resp) => {
+    this.viewsSub = this.saveViewService.getViews(this.loggedUser.id).subscribe((resp) => {
       this.viewChoices = resp;
     });
   }
 
   onSubmit(): void
   {
-
+    this.viewSub = this.saveViewService.getView(this.formGroup.get('selectedLib').value).subscribe((resp) => {
+      this.finishedLib = resp.lib;
+    });
   }
 
 }
