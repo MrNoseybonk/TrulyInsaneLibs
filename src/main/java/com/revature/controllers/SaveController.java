@@ -58,9 +58,4 @@ public class SaveController
 		lib.setId(id);
 		saveService.deleteSavedLib(lib);
 	}
-//	@DeleteMapping
-//	public void deleteSavedLib(@RequestBody SavedLib s)
-//	{
-//		saveService.deleteSavedLib(s);
-//	}
 }

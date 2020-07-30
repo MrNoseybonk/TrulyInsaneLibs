@@ -5,6 +5,9 @@ import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
 import { Person } from 'src/app/Models/person';
+import { Lib } from 'src/app/Models/lib';
+import { SaveRequest } from 'src/app/Models/save-request';
+import { SavedcreateService } from 'src/app/savedcreate.service';
 
 @Component({
   selector: 'app-filecreate',
@@ -15,6 +18,7 @@ export class FilecreateComponent implements OnInit {
   private libSub: Subscription;
   private uploadSub: Subscription;
   private createSub: Subscription;
+  private saveSub: Subscription;
 
   totals: any;
 
@@ -58,6 +62,9 @@ export class FilecreateComponent implements OnInit {
   finishedLib: any;
 
   loggedUser: Person;
+  savedLib: Lib;
+  saveRequest: SaveRequest;
+  savedName: string;
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
@@ -65,7 +72,8 @@ export class FilecreateComponent implements OnInit {
 
   public fileName;
 
-  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService, private savedCreateService: SavedcreateService) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -96,6 +104,23 @@ export class FilecreateComponent implements OnInit {
       });
       };
     }
+  }
+
+  public saveLib(): void
+  {
+    this.savedLib = new Lib();
+    this.saveRequest = new SaveRequest();
+    const finishedLib = document.getElementById('finished');
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.savedLib.lib = finishedLib.innerText;
+
+    this.saveRequest.savedName = this.savedName;
+    this.saveRequest.received = this.savedLib;
+    this.saveRequest.person = this.loggedUser;
+    // console.log(this.saveRequest);
+    this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
+      console.log(resp);
+    });
   }
 
   public onSubmit(): void
