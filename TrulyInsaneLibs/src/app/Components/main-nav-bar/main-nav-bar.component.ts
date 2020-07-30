@@ -18,6 +18,7 @@ export class MainNavBarComponent implements OnInit {
     if (this.loggedUser != null)
     {
       this.loginMessage = this.loggedUser.username;
+      document.getElementById('navLogout').style.display = 'block';
     }
   }
 
@@ -26,5 +27,6 @@ export class MainNavBarComponent implements OnInit {
     this.loginService
     .logout();
     this.loginMessage = '';
+    location.reload();
   }
 }

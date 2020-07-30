@@ -1,55 +1,60 @@
-<div class="intro">
-    <p>Select a template from the list to pick which lib template you want to use.</p>
+<div class="loggedIn" id="loggedIn">
+    <div class="intro">
+        <p>Select a template from the list to pick which lib template you want to use.</p>
+    </div>
+    <div class="selector">
+        <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
+            <select size="10" id="libList" formControlName="selectedLib">
+                <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
+            </select>
+            <input type="submit" [disabled]="formGroup.invalid" value="Select Template" />
+        </form>
+    </div>
+    <div class="inputs" id="inputs" *ngIf=totals>
+        <div class="nouns" *ngFor="let noun of nounsArr; let i = index">
+            <label class="nounLabel">Noun</label><input class="input" type="text" id="noun_{{i}}" maxlength="23" placeholder="e.g. cat, box, house, etc." [(ngModel)]=noun.noun>
+        </div>
+        <div class="plurals" *ngFor="let plural of pluralsArr; let i = index">
+            <label class="pluralLabel">Plural Noun</label><input class="input" type="text" id="plural_{{i}}" maxlength="23" placeholder="e.g. cats, boxes, houses, etc." [(ngModel)]=plural.plural>
+        </div>
+        <div class="verbs" *ngFor="let verb of verbsArr; let i = index">
+            <label class="verbLabel">Verb</label><input class="input" type="text" id="verb_{{i}}" maxlength="23" placeholder="e.g. run, throw, spit, etc." [(ngModel)]=verb.verb>
+        </div>
+        <div class="adjectives" *ngFor="let adj of adjArr; let i = index">
+            <label class="adjLabel">Adjective</label><input class="input" type="text" id="adj_{{i}}" maxlength="23" placeholder="e.g. large, red, quiet, etc." [(ngModel)]=adj.adjective>
+        </div>
+        <div class="colors" *ngFor="let color of colorsArr; let i = index">
+            <label class="colorLabel">Color</label><input class="input" type="text" id="color_{{i}}" maxlength="23" placeholder="e.g. blue, red, mauve, etc." [(ngModel)]=color.color>
+        </div>
+        <div class="ings" *ngFor="let ing of ingsArr; let i = index">
+            <label class="ingLabel">Ing Verb</label><input class="input" type="text" id="ing_{{i}}" maxlength="23" placeholder="e.g. running, throwing, spitting, etc." [(ngModel)]=ing.ing>
+        </div>
+        <div class="adverbs" *ngFor="let adverb of adverbsArr; let i = index">
+            <label class="adverbLabel">Adverb</label><input class="input" type="text" id="adverb_{{i}}" maxlength="23" placeholder="e.g. quickly, quietly, smelly, etc." [(ngModel)]=adverb.adverb>
+        </div>
+        <div class="propers" *ngFor="let prop of propArr; let i = index">
+            <label class="propLabel">Proper Noun</label><input class="input" type="text" id="prop_{{i}}" maxlength="23" placeholder="e.g. John, Sarah, Mars, etc." [(ngModel)]=prop.proper>
+        </div>
+        <div class="numbers" *ngFor="let numb of numbArr; let i = index">
+            <label class="numbLabel">Number</label><input class="input" type="number" id="numb_{{i}}" min="-1000000000000" max="1000000000000" placeholder="e.g. 4, -153, 42, etc." [(ngModel)]=numb.number>
+        </div>
+        <div class="pasts" *ngFor="let past of pastsArr; let i = index">
+            <label class="pastLabel">Past Tense Verb</label><input class="input" type="text" id="past_{{i}}" maxlength="23" placeholder="e.g. ran, threw, spat, etc." [(ngModel)]=past.past>
+        </div>
+        <div class="foods" *ngFor="let food of foodsArr; let i = index">
+            <label class="foodLabel">Food</label><input class="input" type="text" id="food_{{i}}" maxlength="23" placeholder="e.g. sandwhich, carrot, pâté, etc." [(ngModel)]=food.food>
+        </div>
+        <div class="liquids" *ngFor="let liquid of liquidsArr; let i = index">
+            <label class="liquidLabel">Liquid</label><input class="input" type="text" id="liquid_{{i}}" maxlength="23" placeholder="e.g. water, milk, sweat, etc." [(ngModel)]=liquid.liquid>
+        </div>
+        <button type="button" (click)="onCreate()">Create Insane Lib</button>
+    </div>
+    <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
+        <pre id="finished">{{finishedLib}}</pre>
+        <label for="savedName">Lib Name</label><input type="text" class="input" id="savedName" [(ngModel)]=savedName>
+        <button type="button" (click)="saveLib()">Save Insane Lib</button>
+    </div>
 </div>
-<div class="selector">
-    <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
-        <select size="10" id="libList" formControlName="selectedLib">
-            <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
-        </select>
-        <input type="submit" [disabled]="formGroup.invalid" value="Select Template" />
-    </form>
-</div>
-<div class="inputs" id="inputs" *ngIf=totals>
-    <div class="nouns" *ngFor="let noun of nounsArr; let i = index">
-        <label class="nounLabel">Noun</label><input class="input" type="text" id="noun_{{i}}" maxlength="23" placeholder="e.g. cat, box, house, etc." [(ngModel)]=noun.noun>
-    </div>
-    <div class="plurals" *ngFor="let plural of pluralsArr; let i = index">
-        <label class="pluralLabel">Plural Noun</label><input class="input" type="text" id="plural_{{i}}" maxlength="23" placeholder="e.g. cats, boxes, houses, etc." [(ngModel)]=plural.plural>
-    </div>
-    <div class="verbs" *ngFor="let verb of verbsArr; let i = index">
-        <label class="verbLabel">Verb</label><input class="input" type="text" id="verb_{{i}}" maxlength="23" placeholder="e.g. run, throw, spit, etc." [(ngModel)]=verb.verb>
-    </div>
-    <div class="adjectives" *ngFor="let adj of adjArr; let i = index">
-        <label class="adjLabel">Adjective</label><input class="input" type="text" id="adj_{{i}}" maxlength="23" placeholder="e.g. large, red, quiet, etc." [(ngModel)]=adj.adjective>
-    </div>
-    <div class="colors" *ngFor="let color of colorsArr; let i = index">
-        <label class="colorLabel">Color</label><input class="input" type="text" id="color_{{i}}" maxlength="23" placeholder="e.g. blue, red, mauve, etc." [(ngModel)]=color.color>
-    </div>
-    <div class="ings" *ngFor="let ing of ingsArr; let i = index">
-        <label class="ingLabel">Ing Verb</label><input class="input" type="text" id="ing_{{i}}" maxlength="23" placeholder="e.g. running, throwing, spitting, etc." [(ngModel)]=ing.ing>
-    </div>
-    <div class="adverbs" *ngFor="let adverb of adverbsArr; let i = index">
-        <label class="adverbLabel">Adverb</label><input class="input" type="text" id="adverb_{{i}}" maxlength="23" placeholder="e.g. quickly, quietly, smelly, etc." [(ngModel)]=adverb.adverb>
-    </div>
-    <div class="propers" *ngFor="let prop of propArr; let i = index">
-        <label class="propLabel">Proper Noun</label><input class="input" type="text" id="prop_{{i}}" maxlength="23" placeholder="e.g. John, Sarah, Mars, etc." [(ngModel)]=prop.proper>
-    </div>
-    <div class="numbers" *ngFor="let numb of numbArr; let i = index">
-        <label class="numbLabel">Number</label><input class="input" type="number" id="numb_{{i}}" min="-1000000000000" max="1000000000000" placeholder="e.g. 4, -153, 42, etc." [(ngModel)]=numb.number>
-    </div>
-    <div class="pasts" *ngFor="let past of pastsArr; let i = index">
-        <label class="pastLabel">Past Tense Verb</label><input class="input" type="text" id="past_{{i}}" maxlength="23" placeholder="e.g. ran, threw, spat, etc." [(ngModel)]=past.past>
-    </div>
-    <div class="foods" *ngFor="let food of foodsArr; let i = index">
-        <label class="foodLabel">Food</label><input class="input" type="text" id="food_{{i}}" maxlength="23" placeholder="e.g. sandwhich, carrot, pâté, etc." [(ngModel)]=food.food>
-    </div>
-    <div class="liquids" *ngFor="let liquid of liquidsArr; let i = index">
-        <label class="liquidLabel">Liquid</label><input class="input" type="text" id="liquid_{{i}}" maxlength="23" placeholder="e.g. water, milk, sweat, etc." [(ngModel)]=liquid.liquid>
-    </div>
-    <button type="button" (click)="onCreate()">Create Insane Lib</button>
-</div>
-<div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
-    <pre id="finished">{{finishedLib}}</pre>
-    <label for="savedName">Lib Name</label><input type="text" class="input" id="savedName" [(ngModel)]=savedName>
-    <button type="button" (click)="saveLib()">Save Insane Lib</button>
+<div class="loggedOut" id="loggedOut">
+    <p>Please login to use this functionality.</p>
 </div>

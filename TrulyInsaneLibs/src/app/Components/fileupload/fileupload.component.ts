@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FileuploadService } from 'src/app/fileupload.service';
+import { Person } from 'src/app/Models/person';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fileupload',
@@ -10,6 +12,7 @@ import { FileuploadService } from 'src/app/fileupload.service';
 })
 export class FileuploadComponent implements OnInit {
   private uploadSub: Subscription;
+  loggedUser: Person;
 
   public formGroup = this.fb.group({
     file: [null, Validators.required],
@@ -18,9 +21,20 @@ export class FileuploadComponent implements OnInit {
 
   public fileName;
 
-  constructor(private fb: FormBuilder, private uploadService: FileuploadService) { }
+  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+    }
   }
 
   public onFileChange(event)

@@ -4,6 +4,7 @@ import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
+import { Person } from 'src/app/Models/person';
 
 @Component({
   selector: 'app-filecreate',
@@ -56,6 +57,8 @@ export class FilecreateComponent implements OnInit {
   words: Words;
   finishedLib: any;
 
+  loggedUser: Person;
+
   public formGroup = this.fb.group({
     file: [null, Validators.required]
   });
@@ -65,6 +68,17 @@ export class FilecreateComponent implements OnInit {
   constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService) { }
 
   ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+    }
   }
 
   public onFileChange(event)

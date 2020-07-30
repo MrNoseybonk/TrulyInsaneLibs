@@ -8,6 +8,7 @@ import { Words } from 'src/app/Models/words';
 import { Person } from 'src/app/Models/person';
 import { Lib } from 'src/app/Models/lib';
 import { SaveRequest } from 'src/app/Models/save-request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-savedcreate',
@@ -74,10 +75,21 @@ export class SavedcreateComponent implements OnInit {
   });
 
   // tslint:disable-next-line: max-line-length
-  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
+  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService, private router: Router) { }
 
   ngOnInit(): void {
-    this.fillSelector();
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+      this.fillSelector();
+    }
   }
 
   public fillSelector()

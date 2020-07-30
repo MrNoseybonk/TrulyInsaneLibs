@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login.service';
 import { Person } from '../../Models/person';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,24 +13,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   private loginSub: Subscription;
   username: string;
   password: string;
-  logMade: boolean;
   user: Person;
   loggedUser: string;
   loginMessage = document.getElementById('login');
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    this.logMade = false;
     if (localStorage.getItem('currentUser') != null)
     {
-      console.log('Logged in.');
       this.user = JSON.parse(localStorage.getItem('currentUser'));
       this.loggedUser = this.user.username;
     }
     else
     {
-      console.log('Logged out.');
       this.loggedUser = null;
     }
   }
@@ -43,11 +40,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.user = resp;
       this.loggedUser = this.user.username;
     });
+
+    this.router.navigate(['']);
+    location.reload();
   }
 
   ngOnDestroy()
   {
-    if (this.logMade === true)
+    if (this.loginSub)
     {
       this.loginSub.unsubscribe();
     }

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SaveviewService } from '../../saveview.service';
 import { Person } from 'src/app/Models/person';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saveview',
@@ -22,10 +23,21 @@ export class SaveviewComponent implements OnInit {
     selectedLib: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private saveViewService: SaveviewService) { }
+  constructor(private fb: FormBuilder, private saveViewService: SaveviewService, private router: Router) { }
 
   ngOnInit(): void {
-    this.fillSelector();
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+      this.fillSelector();
+    }
   }
 
   public fillSelector()
