@@ -3,17 +3,17 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UrlService } from './url.service';
 import { map } from 'rxjs/operators';
-import { User } from '../app/Models/user';
+import { Person } from './Models/person';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  public currentUser: Observable<User>;
-  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<Person>;
+  private currentUserSubject: BehaviorSubject<Person>;
 
   constructor(private http: HttpClient, private urlService: UrlService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<Person>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
    }
 
@@ -26,7 +26,7 @@ export class LoginService {
   }
 
   logout() {
-    alert('You have logged out.')
+    alert('You have logged out.');
     this.http.delete(this.urlService.getUrl() + 'login').subscribe(data => {});
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

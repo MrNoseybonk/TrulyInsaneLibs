@@ -2,18 +2,13 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "saved_lib")
@@ -26,15 +21,14 @@ public class SavedLib
 	private String savedName;
 	@Column
 	private String lib;
-//	@ManyToOne(fetch=FetchType.EAGER, targetEntity = Person.class)
-//	@JoinTable(name="person",
-//	joinColumns=@JoinColumn(name="id"),
-//	inverseJoinColumns=@JoinColumn(name="person_id"))
 	@Column
 	private Integer personId;
 	@JsonInclude()
 	@Transient
 	private Person person;
+	@JsonInclude()
+	@Transient
+	private Lib received;
 	
 	public SavedLib()
 	{
@@ -84,8 +78,17 @@ public class SavedLib
 		this.person = person;
 	}
 
+	public Lib getReceived() {
+		return received;
+	}
+
+	public void setReceived(Lib received) {
+		this.received = received;
+	}
+
 	@Override
 	public String toString() {
-		return "SavedLib [id=" + id + ", savedName=" + savedName + ", lib=" + lib + ", personId=" + personId + "]";
+		return "SavedLib [id=" + id + ", savedName=" + savedName + ", lib=" + lib + ", personId=" + personId
+				+ ", person=" + person + ", received=" + received + "]";
 	}
 }
