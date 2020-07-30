@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.LibTemplate;
-import com.revature.beans.TemplateRequest;
 import com.revature.services.FileService;
 
 @RestController

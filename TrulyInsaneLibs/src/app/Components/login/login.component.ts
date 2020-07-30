@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login.service';
-import { User } from '../../Models/user';
+import { Person } from '../../Models/person';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   username: string;
   password: string;
   logMade: boolean;
-  user: User;
+  user: Person;
   loggedUser: string;
   loginMessage = document.getElementById('login');
 

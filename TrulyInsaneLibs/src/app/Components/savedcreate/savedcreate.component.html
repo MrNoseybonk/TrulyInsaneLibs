@@ -49,5 +49,7 @@
     <button type="button" (click)="onCreate()">Create Insane Lib</button>
 </div>
 <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
-    <p>{{finishedLib}}</p>
+    <pre id="finished">{{finishedLib}}</pre>
+    <label for="savedName">Lib Name</label><input type="text" class="input" id="savedName" [(ngModel)]=savedName>
+    <button type="button" (click)="saveLib()">Save Insane Lib</button>
 </div>

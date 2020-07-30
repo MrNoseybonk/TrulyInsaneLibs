@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
-import { User } from 'src/app/Models/user';
+import { Person } from 'src/app/Models/person';
 
 @Component({
   selector: 'app-main-nav-bar',
@@ -8,7 +8,7 @@ import { User } from 'src/app/Models/user';
   styleUrls: ['./main-nav-bar.component.css']
 })
 export class MainNavBarComponent implements OnInit {
-  loggedUser: User;
+  loggedUser: Person;
   loginMessage: string;
 
   constructor(private loginService: LoginService) { }

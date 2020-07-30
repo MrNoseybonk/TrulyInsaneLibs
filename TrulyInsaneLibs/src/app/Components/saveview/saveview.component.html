@@ -1,0 +1,15 @@
+<div class="intro">
+    <p>Select a Lib from the list to pick which one you want to view.</p>
+</div>
+<div class="selector">
+    <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
+        <select size="10" id="viewList" formControlName="selectedLib">
+            <option value={{choice.id}} id="option_{{choice.id}}" *ngFor="let choice of viewChoices">{{choice.savedName}}</option>
+        </select>
+        <input type="submit" [disabled]="formGroup.invalid" value="Select Lib" />
+    </form>
+</div>
+<div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
+    <pre id="finished">{{finishedLib}}</pre>
+    <button id="deletedLib" (click)="onDelete()">Delete This Lib</button>
+</div>

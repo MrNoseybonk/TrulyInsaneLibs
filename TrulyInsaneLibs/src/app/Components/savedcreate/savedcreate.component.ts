@@ -5,6 +5,9 @@ import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
+import { Person } from 'src/app/Models/person';
+import { Lib } from 'src/app/Models/lib';
+import { SaveRequest } from 'src/app/Models/save-request';
 
 @Component({
   selector: 'app-savedcreate',
@@ -17,6 +20,7 @@ export class SavedcreateComponent implements OnInit {
   private getSub: Subscription;
   private uploadSub: Subscription;
   private createSub: Subscription;
+  private saveSub: Subscription;
 
   totals: any;
 
@@ -60,6 +64,11 @@ export class SavedcreateComponent implements OnInit {
   finishedLib: any;
   words: Words;
 
+  loggedUser: Person;
+  savedLib: Lib;
+  savedName: string;
+  saveRequest: SaveRequest;
+
   public formGroup = this.fb.group({
     selectedLib: [null, Validators.required]
   });
@@ -75,6 +84,23 @@ export class SavedcreateComponent implements OnInit {
   {
     this.libSub = this.savedCreateService.getLibs().subscribe((resp) => {
       this.libChoices = resp;
+    });
+  }
+
+  public saveLib()
+  {
+    this.savedLib = new Lib();
+    this.saveRequest = new SaveRequest();
+    const finishedLib = document.getElementById('finished');
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.savedLib.lib = finishedLib.innerText;
+
+    this.saveRequest.savedName = this.savedName;
+    this.saveRequest.received = this.savedLib;
+    this.saveRequest.person = this.loggedUser;
+    // console.log(this.saveRequest);
+    this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
+      console.log(resp);
     });
   }
 

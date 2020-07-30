@@ -2,12 +2,9 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,16 +21,12 @@ public class LibTemplate
 	private String libName;
 	@Column
 	private String lib;
-//	@ManyToOne(fetch=FetchType.EAGER, targetEntity = Person.class)
-//	@JoinColumn(name="id", insertable=false, updatable=false)
-//	private Integer uploaderId;
 	
 	public LibTemplate()
 	{
 		id = 0;
 		libName = "";
 		lib = null;
-		//uploaderId = 0;
 	}
 
 	public int getId() {
@@ -59,14 +52,6 @@ public class LibTemplate
 	public void setLib(String string) {
 		this.lib = string;
 	}
-
-//	public int getUploaderId() {
-//		return uploaderId;
-//	}
-//
-//	public void setUploaderId(Integer uploaderId) {
-//		this.uploaderId = uploaderId;
-//	}
 
 	@Override
 	public String toString() {
