@@ -1,7 +1,12 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +35,25 @@ public class SaveController
 		//System.out.println(s);
 		int libId = saveService.addSavedLib(s);
 		return ResponseEntity.ok(libId);
+	}
+	
+	@GetMapping("/all/{id}")
+	public ResponseEntity<List<SavedLib>> getSavedLibs(@PathVariable("id") Integer id)
+	{
+		List<SavedLib> libs = saveService.getSavedLibs(id);
+		return ResponseEntity.ok(libs);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<SavedLib> getSavedLib(@PathVariable("id") Integer id)
+	{
+		SavedLib lib = saveService.getSavedLib(id);
+		return ResponseEntity.ok(lib);
+	}
+	
+	@DeleteMapping
+	public void deleteSavedLib(@RequestBody SavedLib s)
+	{
+		saveService.deleteSavedLib(s);
 	}
 }

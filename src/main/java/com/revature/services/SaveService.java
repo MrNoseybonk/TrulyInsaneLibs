@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,20 @@ public class SaveService
 	public Integer addSavedLib(SavedLib s)
 	{
 		return savedLibDao.save(s).getId();
+	}
+	
+	public SavedLib getSavedLib(Integer id)
+	{
+		return savedLibDao.getOne(id);
+	}
+	
+	public List<SavedLib> getSavedLibs(Integer id)
+	{
+		return savedLibDao.findByPersonId(id);
+	}
+	
+	public void deleteSavedLib(SavedLib s)
+	{
+		savedLibDao.delete(s);
 	}
 }

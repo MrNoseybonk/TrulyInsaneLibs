@@ -98,7 +98,7 @@ export class SavedcreateComponent implements OnInit {
     this.saveRequest.savedName = this.savedName;
     this.saveRequest.received = this.savedLib;
     this.saveRequest.person = this.loggedUser;
-    console.log(this.saveRequest);
+    // console.log(this.saveRequest);
     this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
       console.log(resp);
     });

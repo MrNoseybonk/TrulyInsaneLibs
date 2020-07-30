@@ -8,10 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "saved_lib")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class SavedLib 
 {
 	@Id
