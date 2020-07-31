@@ -2,16 +2,18 @@
     <div class="title">
         <h2>Welcome to Truly InsaneLibs!</h2>
     </div>
-    <div class="intro">
-        <p>This application allows you to create a MadLib
-            using either a txt file or a  previous entered
-            MadLib.</p>
+    <div class="prelog" id="prelog">
+        <div class="intro">
+            <p>This application allows you to create a MadLib
+                using either a txt file or a  previous entered
+                MadLib.</p>
+        </div>
+        <div class="login" id="login">
+            <p>Please login.</p>
+            <label for="username">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
+            <label for="password">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
+            <button id="loginButton" (click)="login()">Login</button>
+        </div>
     </div>
-    <div class="login" id="login">
-        <p>Please login.</p>
-        <label for="username">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
-        <label for="password">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
-        <button id="loginButton" (click)="login()">Login</button>
-    </div>
-    <div id="welcome" *ngIf=loggedUser><span>{{loggedUser}}</span></div>
+    <div id="welcome" *ngIf=loggedUser><span>Welcome {{loggedUser}}!</span></div>
 </div>

@@ -11,7 +11,7 @@ import { Person } from './Models/person';
 export class LoginService {
   public currentUser: Observable<Person>;
   private currentUserSubject: BehaviorSubject<Person>;
-  private messageSource = new BehaviorSubject('');
+  private messageSource = new BehaviorSubject(null);
   currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient, private urlService: UrlService) {

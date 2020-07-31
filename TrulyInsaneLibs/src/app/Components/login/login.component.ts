@@ -21,6 +21,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
+
+    if (this.loggedUser == null)
+    {
+      document.getElementById('prelog').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('prelog').style.display = 'none';
+    }
   }
 
   login()
@@ -34,7 +43,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
     this.loginMessage = this.loggedUser;
     this.loginService.changeMessage(this.loginMessage);
-    document.getElementById('navLogout').style.display = 'block';
+    document.getElementById('navLogout').style.display = 'unset';
+    document.getElementById('prelog').style.display = 'none';
+    this.username = '';
+    this.password = '';
   }
 
   ngOnDestroy()

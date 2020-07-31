@@ -6,9 +6,7 @@
             <a class="thirdBtn" routerLink="/fileupload">Upload An Insane Lib</a>
             <a class="fourthBtn" routerLink="/savedcreate">Create Insane Lib From A Saved Template</a>
             <a class="fifthBtn" routerLink="/savedview">View Your Saved Libs</a>
-        </div>
-        <div class="navLogout" id="navLogout">
-            <a class="logoutBtn" routerLink="/" (click)="logout()">Logout</a>
+            <a class="sixthBtn" id="navLogout" routerLink="/" (click)="logout()">Logout</a>
         </div>
         <div class="loggedIn" *ngIf=loggedUsername>
             {{loggedUsername}}

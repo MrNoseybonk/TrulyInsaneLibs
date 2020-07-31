@@ -1,15 +1,17 @@
-<div class="loggedIn" id="loggedIn">
-    <div class="intro">
-        <p>Please upload your txt file to be saved. Don't forget to give it a name.</p>
+<div class="body">
+    <div class="loggedIn" id="loggedIn">
+        <div class="intro">
+            <p>Please upload your txt file to be saved. Don't forget to give it a name.</p>
+        </div>
+        <div class="uploader">
+            <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
+                <input type="file" accept=".txt" (change)="onFileChange($event)" />
+                <label>Name</label><input type="text" id="libName" formControlName="libName" maxlength="23" placeholder="The name of your story template." />
+                <input type="submit" [disabled]="formGroup.invalid" value="upload" />
+            </form>
+        </div>
     </div>
-    <div class="uploader">
-        <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
-            <input type="file" accept=".txt" (change)="onFileChange($event)" />
-            <label>Name</label><input type="text" id="libName" formControlName="libName" maxlength="23" placeholder="The name of your story template." />
-            <input type="submit" [disabled]="formGroup.invalid" value="upload" />
-        </form>
+    <div class="loggedOut" id="loggedOut">
+        <p>Please login to use this functionality.</p>
     </div>
-</div>
-<div class="loggedOut" id="loggedOut">
-    <p>Please login to use this functionality.</p>
 </div>
