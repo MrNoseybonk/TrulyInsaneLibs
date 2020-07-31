@@ -114,7 +114,11 @@ export class SavedcreateComponent implements OnInit, OnDestroy {
       this.saveRequest.person = this.loggedUser;
       // console.log(this.saveRequest);
       this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
-        console.log(resp);
+        // console.log(resp);
+        alert('Lib saved!');
+      },
+      message => {
+        alert('The Lib wasn\'t saved correctly. Please try again.');
       });
     }
     else

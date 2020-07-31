@@ -59,7 +59,11 @@ export class FileuploadComponent implements OnInit, OnDestroy {
   {
     this.uploadSub = this.uploadService.uploadTemplate(this.fileName, this.formGroup.get('libName').value, this.formGroup.get('file').value)
     .subscribe((resp) => {
-      console.log(resp);
+      // console.log(resp);
+      alert('Template saved!');
+    },
+    message => {
+      alert('The template wasn\'t saved correctly. Please try again.');
     });
   }
 

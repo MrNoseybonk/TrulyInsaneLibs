@@ -57,7 +57,12 @@ export class SaveviewComponent implements OnInit, OnDestroy {
 
   onDelete(): void
   {
-    this.deleteSub = this.saveViewService.deleteView(this.formGroup.get('selectedLib').value).subscribe();
+    this.deleteSub = this.saveViewService.deleteView(this.formGroup.get('selectedLib').value).subscribe(() => {
+      alert('Lib deleted.');
+    },
+    message => {
+      alert('The Lib wasn\'t deleted correctly. Please try again.');
+    });
     window.location.reload();
   }
 

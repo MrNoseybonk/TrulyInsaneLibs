@@ -53,7 +53,7 @@
         </div>
         <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
             <pre id="finished">{{finishedLib}}</pre>
-            <label for="savedName" id="savedlabel">Lib Name</label><input type="text" class="input" id="savedName" maxlength="23" [(ngModel)]=savedName>
+            <label for="savedName" id="savedlabel">Lib Name</label><input type="text" class="input" id="savedName" maxlength="25" [(ngModel)]=savedName>
             <button type="button" (click)="saveLib()">Save Insane Lib</button>
         </div>
     </div>
