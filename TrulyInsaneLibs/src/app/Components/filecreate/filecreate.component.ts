@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
 import { Subscription } from 'rxjs';
 import { Words } from 'src/app/Models/words';
+import { Person } from 'src/app/Models/person';
+import { Lib } from 'src/app/Models/lib';
+import { SaveRequest } from 'src/app/Models/save-request';
+import { SavedcreateService } from 'src/app/savedcreate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filecreate',
   templateUrl: './filecreate.component.html',
   styleUrls: ['./filecreate.component.css']
 })
-export class FilecreateComponent implements OnInit {
+export class FilecreateComponent implements OnInit, OnDestroy {
   private libSub: Subscription;
   private uploadSub: Subscription;
   private createSub: Subscription;
+  private saveSub: Subscription;
 
   totals: any;
 
@@ -56,15 +62,32 @@ export class FilecreateComponent implements OnInit {
   words: Words;
   finishedLib: any;
 
+  loggedUser: Person;
+  savedLib: Lib;
+  saveRequest: SaveRequest;
+  savedName: string;
+
   public formGroup = this.fb.group({
     file: [null, Validators.required]
   });
 
   public fileName;
 
-  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private router: Router, private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService, private savedCreateService: SavedcreateService) { }
 
   ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+    }
   }
 
   public onFileChange(event)
@@ -81,6 +104,34 @@ export class FilecreateComponent implements OnInit {
           file: reader.result
       });
       };
+    }
+  }
+
+  public saveLib(): void
+  {
+    if (this.savedName)
+    {
+      this.savedLib = new Lib();
+      this.saveRequest = new SaveRequest();
+      const finishedLib = document.getElementById('finished');
+      this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.savedLib.lib = finishedLib.innerText;
+
+      this.saveRequest.savedName = this.savedName;
+      this.saveRequest.received = this.savedLib;
+      this.saveRequest.person = this.loggedUser;
+      // console.log(this.saveRequest);
+      this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
+        // console.log(resp);
+        alert('Lib saved!');
+      },
+      message => {
+        alert('The Lib wasn\'t saved correctly. Please try again.');
+      });
+    }
+    else
+    {
+      alert('Please enter a name for your finished lib.');
     }
   }
 
@@ -332,6 +383,29 @@ export class FilecreateComponent implements OnInit {
     if (finishedLib != null)
     {
       finishedLib.style.display = 'block';
+    }
+  }
+
+  ngOnDestroy()
+  {
+    if (this.libSub)
+    {
+      this.libSub.unsubscribe();
+    }
+
+    if (this.uploadSub)
+    {
+      this.uploadSub.unsubscribe();
+    }
+
+    if (this.createSub)
+    {
+      this.createSub.unsubscribe();
+    }
+
+    if (this.saveSub)
+    {
+      this.saveSub.unsubscribe();
     }
   }
 }

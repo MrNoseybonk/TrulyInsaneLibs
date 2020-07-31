@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SavedcreateService } from 'src/app/savedcreate.service';
 import { FileuploadService } from 'src/app/fileupload.service';
@@ -8,13 +8,14 @@ import { Words } from 'src/app/Models/words';
 import { Person } from 'src/app/Models/person';
 import { Lib } from 'src/app/Models/lib';
 import { SaveRequest } from 'src/app/Models/save-request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-savedcreate',
   templateUrl: './savedcreate.component.html',
   styleUrls: ['./savedcreate.component.css']
 })
-export class SavedcreateComponent implements OnInit {
+export class SavedcreateComponent implements OnInit, OnDestroy {
   libChoices: any[];
   private libSub: Subscription;
   private getSub: Subscription;
@@ -74,10 +75,21 @@ export class SavedcreateComponent implements OnInit {
   });
 
   // tslint:disable-next-line: max-line-length
-  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
+  constructor(private fb: FormBuilder, private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService, private router: Router) { }
 
   ngOnInit(): void {
-    this.fillSelector();
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser == null)
+    {
+      document.getElementById('loggedIn').style.display = 'none';
+      document.getElementById('loggedOut').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('loggedIn').style.display = 'block';
+      document.getElementById('loggedOut').style.display = 'none';
+      this.fillSelector();
+    }
   }
 
   public fillSelector()
@@ -89,19 +101,30 @@ export class SavedcreateComponent implements OnInit {
 
   public saveLib()
   {
-    this.savedLib = new Lib();
-    this.saveRequest = new SaveRequest();
-    const finishedLib = document.getElementById('finished');
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.savedLib.lib = finishedLib.innerText;
+    if (this.savedName)
+    {
+      this.savedLib = new Lib();
+      this.saveRequest = new SaveRequest();
+      const finishedLib = document.getElementById('finished');
+      this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.savedLib.lib = finishedLib.innerText;
 
-    this.saveRequest.savedName = this.savedName;
-    this.saveRequest.received = this.savedLib;
-    this.saveRequest.person = this.loggedUser;
-    // console.log(this.saveRequest);
-    this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
-      console.log(resp);
-    });
+      this.saveRequest.savedName = this.savedName;
+      this.saveRequest.received = this.savedLib;
+      this.saveRequest.person = this.loggedUser;
+      // console.log(this.saveRequest);
+      this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
+        // console.log(resp);
+        alert('Lib saved!');
+      },
+      message => {
+        alert('The Lib wasn\'t saved correctly. Please try again.');
+      });
+    }
+    else
+    {
+      alert('Please enter a name for your finished lib.');
+    }
   }
 
   public onSubmit()
@@ -357,6 +380,34 @@ export class SavedcreateComponent implements OnInit {
     if (finishedLib != null)
     {
       finishedLib.style.display = 'block';
+    }
+  }
+
+  ngOnDestroy()
+  {
+    if (this.libSub)
+    {
+      this.libSub.unsubscribe();
+    }
+
+    if (this.getSub)
+    {
+      this.getSub.unsubscribe();
+    }
+
+    if (this.uploadSub)
+    {
+      this.uploadSub.unsubscribe();
+    }
+
+    if (this.createSub)
+    {
+      this.createSub.unsubscribe();
+    }
+
+    if (this.saveSub)
+    {
+      this.saveSub.unsubscribe();
     }
   }
 }

@@ -16,14 +16,14 @@ create table person
 create table lib_template
 (
   id number(10) primary key,
-  lib_name varchar2(20) not null,
+  lib_name varchar2(25) not null,
   lib clob not null
 );
 
 create table saved_lib
 (
   id number(10) primary key,
-  saved_name varchar2(20) not null,
+  saved_name varchar2(25) not null,
   lib clob not null,
   person_id number(10) not null,
   constraint fk_person_saved foreign key (person_id) references person(id)

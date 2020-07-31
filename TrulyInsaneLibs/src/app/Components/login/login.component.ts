@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login.service';
 import { Person } from '../../Models/person';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,25 +13,22 @@ export class LoginComponent implements OnInit, OnDestroy {
   private loginSub: Subscription;
   username: string;
   password: string;
-  logMade: boolean;
   user: Person;
   loggedUser: string;
-  loginMessage = document.getElementById('login');
+  loginMessage: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    this.logMade = false;
-    if (localStorage.getItem('currentUser') != null)
+    this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
+
+    if (this.loggedUser == null)
     {
-      console.log('Logged in.');
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
-      this.loggedUser = this.user.username;
+      document.getElementById('prelog').style.display = 'block';
     }
     else
     {
-      console.log('Logged out.');
-      this.loggedUser = null;
+      document.getElementById('prelog').style.display = 'none';
     }
   }
 
@@ -39,15 +37,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSub = this.loginService
     .login(this.username, this.password)
     .subscribe((resp) => {
-      this.loginMessage = document.getElementById('login');
       this.user = resp;
       this.loggedUser = this.user.username;
+      this.loginService.changeMessage(this.loggedUser);
+      sessionStorage.setItem('currentUser', JSON.stringify(this.user));
     });
+    this.loginMessage = this.loggedUser;
+    this.loginService.changeMessage(this.loginMessage);
+    document.getElementById('navLogout').style.display = 'unset';
+    document.getElementById('prelog').style.display = 'none';
+    this.username = '';
+    this.password = '';
   }
 
   ngOnDestroy()
   {
-    if (this.logMade === true)
+    if (this.loginSub)
     {
       this.loginSub.unsubscribe();
     }

@@ -4,3 +4,9 @@ pre
     white-space: pre-line;
     text-align : left;
  }
+
+ .body
+ {
+     width: 750px;
+     margin: 5% 30%;
+ }
