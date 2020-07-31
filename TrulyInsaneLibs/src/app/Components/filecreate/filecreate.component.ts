@@ -109,19 +109,26 @@ export class FilecreateComponent implements OnInit, OnDestroy {
 
   public saveLib(): void
   {
-    this.savedLib = new Lib();
-    this.saveRequest = new SaveRequest();
-    const finishedLib = document.getElementById('finished');
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.savedLib.lib = finishedLib.innerText;
+    if (this.savedName)
+    {
+      this.savedLib = new Lib();
+      this.saveRequest = new SaveRequest();
+      const finishedLib = document.getElementById('finished');
+      this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.savedLib.lib = finishedLib.innerText;
 
-    this.saveRequest.savedName = this.savedName;
-    this.saveRequest.received = this.savedLib;
-    this.saveRequest.person = this.loggedUser;
-    // console.log(this.saveRequest);
-    this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
-      console.log(resp);
-    });
+      this.saveRequest.savedName = this.savedName;
+      this.saveRequest.received = this.savedLib;
+      this.saveRequest.person = this.loggedUser;
+      // console.log(this.saveRequest);
+      this.saveSub = this.savedCreateService.saveLib(this.saveRequest).subscribe((resp) => {
+        console.log(resp);
+      });
+    }
+    else
+    {
+      alert('Please enter a name for your finished lib.');
+    }
   }
 
   public onSubmit(): void

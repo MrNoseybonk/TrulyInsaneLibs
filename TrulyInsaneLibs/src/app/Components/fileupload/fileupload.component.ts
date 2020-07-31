@@ -16,7 +16,7 @@ export class FileuploadComponent implements OnInit, OnDestroy {
 
   public formGroup = this.fb.group({
     file: [null, Validators.required],
-    libName: ['']
+    libName: [null, Validators.required]
   });
 
   public fileName;
