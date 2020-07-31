@@ -10,9 +10,9 @@
         </div>
         <div class="login" id="login">
             <p>Please login.</p>
-            <label for="username">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
-            <label for="password">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
-            <button id="loginButton" (click)="login()">Login</button>
+            <label for="username" id="namelabel">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
+            <label for="password" id="passlabel">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
+            <button id="loginbutton" (click)="login()">Login</button>
         </div>
     </div>
     <div id="welcome" *ngIf=loggedUser><span>Welcome {{loggedUser}}!</span></div>

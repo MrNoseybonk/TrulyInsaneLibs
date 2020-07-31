@@ -1,6 +1,7 @@
 <div class="body">
     <div class="loggedIn" id="loggedIn">
         <div class="intro">
+            <h2>Create A Lib With A Saved Template</h2>
             <p>Select a template from the list to pick which lib template you want to use.</p>
         </div>
         <div class="selector">
@@ -52,7 +53,7 @@
         </div>
         <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
             <pre id="finished">{{finishedLib}}</pre>
-            <label for="savedName">Lib Name</label><input type="text" class="input" id="savedName" maxlength="23" [(ngModel)]=savedName>
+            <label for="savedName" id="savedlabel">Lib Name</label><input type="text" class="input" id="savedName" maxlength="23" [(ngModel)]=savedName>
             <button type="button" (click)="saveLib()">Save Insane Lib</button>
         </div>
     </div>

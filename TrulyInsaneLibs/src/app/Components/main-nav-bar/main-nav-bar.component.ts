@@ -28,6 +28,8 @@ export class MainNavBarComponent implements OnInit {
     this.loginService.changeMessage(null);
     document.getElementById('navLogout').style.display = 'none';
 
+    sessionStorage.removeItem('currentUser');
+
     if (document.getElementById('prelog'))
     {
       document.getElementById('prelog').style.display = 'block';
