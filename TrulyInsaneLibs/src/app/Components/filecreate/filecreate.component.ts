@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './filecreate.component.html',
   styleUrls: ['./filecreate.component.css']
 })
-export class FilecreateComponent implements OnInit {
+export class FilecreateComponent implements OnInit, OnDestroy {
   private libSub: Subscription;
   private uploadSub: Subscription;
   private createSub: Subscription;
@@ -372,6 +372,29 @@ export class FilecreateComponent implements OnInit {
     if (finishedLib != null)
     {
       finishedLib.style.display = 'block';
+    }
+  }
+
+  ngOnDestroy()
+  {
+    if (this.libSub)
+    {
+      this.libSub.unsubscribe();
+    }
+
+    if (this.uploadSub)
+    {
+      this.uploadSub.unsubscribe();
+    }
+
+    if (this.createSub)
+    {
+      this.createSub.unsubscribe();
+    }
+
+    if (this.saveSub)
+    {
+      this.saveSub.unsubscribe();
     }
   }
 }

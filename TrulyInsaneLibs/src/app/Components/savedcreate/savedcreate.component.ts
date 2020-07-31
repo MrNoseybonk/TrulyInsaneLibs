@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SavedcreateService } from 'src/app/savedcreate.service';
 import { FileuploadService } from 'src/app/fileupload.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './savedcreate.component.html',
   styleUrls: ['./savedcreate.component.css']
 })
-export class SavedcreateComponent implements OnInit {
+export class SavedcreateComponent implements OnInit, OnDestroy {
   libChoices: any[];
   private libSub: Subscription;
   private getSub: Subscription;
@@ -369,6 +369,34 @@ export class SavedcreateComponent implements OnInit {
     if (finishedLib != null)
     {
       finishedLib.style.display = 'block';
+    }
+  }
+
+  ngOnDestroy()
+  {
+    if (this.libSub)
+    {
+      this.libSub.unsubscribe();
+    }
+
+    if (this.getSub)
+    {
+      this.getSub.unsubscribe();
+    }
+
+    if (this.uploadSub)
+    {
+      this.uploadSub.unsubscribe();
+    }
+
+    if (this.createSub)
+    {
+      this.createSub.unsubscribe();
+    }
+
+    if (this.saveSub)
+    {
+      this.saveSub.unsubscribe();
     }
   }
 }

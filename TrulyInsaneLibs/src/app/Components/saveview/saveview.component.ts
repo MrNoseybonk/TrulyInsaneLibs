@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SaveviewService } from '../../saveview.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './saveview.component.html',
   styleUrls: ['./saveview.component.css']
 })
-export class SaveviewComponent implements OnInit {
+export class SaveviewComponent implements OnInit, OnDestroy {
   viewChoices: any[];
   finishedLib: string;
   viewsSub: Subscription;
@@ -61,4 +61,21 @@ export class SaveviewComponent implements OnInit {
     window.location.reload();
   }
 
+  ngOnDestroy()
+  {
+    if (this.viewsSub)
+    {
+      this.viewsSub.unsubscribe();
+    }
+
+    if (this.viewSub)
+    {
+      this.viewSub.unsubscribe();
+    }
+
+    if (this.deleteSub)
+    {
+      this.deleteSub.unsubscribe();
+    }
+  }
 }

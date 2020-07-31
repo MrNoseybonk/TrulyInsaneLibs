@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FileuploadService } from 'src/app/fileupload.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './fileupload.component.html',
   styleUrls: ['./fileupload.component.css']
 })
-export class FileuploadComponent implements OnInit {
+export class FileuploadComponent implements OnInit, OnDestroy {
   private uploadSub: Subscription;
   loggedUser: Person;
 
@@ -63,4 +63,11 @@ export class FileuploadComponent implements OnInit {
     });
   }
 
+  ngOnDestroy()
+  {
+    if (this.uploadSub)
+    {
+      this.uploadSub.unsubscribe();
+    }
+  }
 }
