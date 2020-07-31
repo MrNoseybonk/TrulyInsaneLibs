@@ -8,6 +8,7 @@ import { Person } from 'src/app/Models/person';
 import { Lib } from 'src/app/Models/lib';
 import { SaveRequest } from 'src/app/Models/save-request';
 import { SavedcreateService } from 'src/app/savedcreate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filecreate',
@@ -73,7 +74,7 @@ export class FilecreateComponent implements OnInit {
   public fileName;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService, private savedCreateService: SavedcreateService) { }
+  constructor(private router: Router, private fb: FormBuilder, private uploadService: FileuploadService, private libService: LibService, private savedCreateService: SavedcreateService) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));

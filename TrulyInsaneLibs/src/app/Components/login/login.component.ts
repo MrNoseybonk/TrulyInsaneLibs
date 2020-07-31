@@ -15,20 +15,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   password: string;
   user: Person;
   loggedUser: string;
-  loginMessage = document.getElementById('login');
+  loginMessage: string;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('currentUser') != null)
-    {
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
-      this.loggedUser = this.user.username;
-    }
-    else
-    {
-      this.loggedUser = null;
-    }
+    this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
   }
 
   login()
@@ -36,13 +28,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSub = this.loginService
     .login(this.username, this.password)
     .subscribe((resp) => {
-      this.loginMessage = document.getElementById('login');
       this.user = resp;
       this.loggedUser = this.user.username;
+      this.loginService.changeMessage(this.loggedUser);
     });
-
-    this.router.navigate(['']);
-    location.reload();
+    this.loginMessage = this.loggedUser;
+    this.loginService.changeMessage(this.loginMessage);
+    document.getElementById('navLogout').style.display = 'block';
   }
 
   ngOnDestroy()

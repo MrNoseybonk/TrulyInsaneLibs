@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
 import { Person } from 'src/app/Models/person';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav-bar',
@@ -9,17 +10,13 @@ import { Person } from 'src/app/Models/person';
 })
 export class MainNavBarComponent implements OnInit {
   loggedUser: Person;
+  loggedUsername: string;
   loginMessage: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.loginService.currentUser.subscribe(user => this.loggedUser = user);
-    if (this.loggedUser != null)
-    {
-      this.loginMessage = this.loggedUser.username;
-      document.getElementById('navLogout').style.display = 'block';
-    }
+    this.loginService.currentMessage.subscribe(message => this.loggedUsername = message);
   }
 
   logout()
@@ -27,6 +24,8 @@ export class MainNavBarComponent implements OnInit {
     this.loginService
     .logout();
     this.loginMessage = '';
-    location.reload();
+
+    this.loginService.changeMessage(null);
+    document.getElementById('navLogout').style.display = 'none';
   }
 }

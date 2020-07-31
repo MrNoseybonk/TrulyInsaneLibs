@@ -11,11 +11,17 @@ import { Person } from './Models/person';
 export class LoginService {
   public currentUser: Observable<Person>;
   private currentUserSubject: BehaviorSubject<Person>;
+  private messageSource = new BehaviorSubject('');
+  currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient, private urlService: UrlService) {
     this.currentUserSubject = new BehaviorSubject<Person>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
    }
+
+   changeMessage(message: string) {
+    this.messageSource.next(message);
+  }
 
   login(username, password): Observable<any> {
     return this.http.post<any>(this.urlService.getUrl() + 'login', {username, password}).pipe(

@@ -46,7 +46,6 @@ export class FileuploadComponent implements OnInit {
       const [file] = event.target.files;
 
       reader.readAsBinaryString(file);
-      // reader.readAsArrayBuffer(file);
 
       reader.onload = () => {
         this.formGroup.patchValue({
