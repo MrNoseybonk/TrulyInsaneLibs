@@ -37,7 +37,7 @@ import { LibcreateComponent } from './Components/libcreate/libcreate.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LibService, LoginService, UrlService],
+  providers: [LibService, LoginService, UrlService, FilecreateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
