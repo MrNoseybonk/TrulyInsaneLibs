@@ -25,9 +25,7 @@ export class NewuserService {
 
   register(username, password): Observable<any> {
     return this.http.post<any>(this.urlService.getUrl() + 'login/register', {username, password}).pipe(
-      map( resp => { localStorage.setItem('currentUser', JSON.stringify(resp));
-                     this.currentUserSubject.next(resp);
-                     return resp; } )
+      map( resp => resp )
     );
   }
 }

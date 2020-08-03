@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Person } from 'src/app/Models/person';
 import { NewuserService } from 'src/app/newuser.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newuser',
@@ -12,6 +13,7 @@ import { NewuserService } from 'src/app/newuser.service';
 export class NewuserComponent implements OnInit, OnDestroy {
   registerMessage: string;
   loggedUser: Person;
+  newUser: Person;
   private registerSub: Subscription;
 
   public registerForm = this.fb.group({
@@ -19,7 +21,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
     password: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private newUserService: NewuserService) { }
+  constructor(private fb: FormBuilder, private newUserService: NewuserService, private router: Router) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -38,12 +40,25 @@ export class NewuserComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.registerSub = this.newUserService.register(this.registerForm.get('username').value, this.registerForm.get('password').value)
     .subscribe((resp) => {
-      alert('You have registered!');
+      this.newUser = resp;
+      console.log(this.newUser);
+      if (this.newUser.id !== -1)
+      {
+        alert('You have registered!');
+        this.router.navigate(['']);
+      }
+      else
+      {
+        this.registerMessage = 'That username has already been taken. Please choose another one.';
+      }
     });
   }
 
   ngOnDestroy(): void {
-
+    if (this.registerSub)
+    {
+      this.registerSub.unsubscribe();
+    }
   }
 
 }

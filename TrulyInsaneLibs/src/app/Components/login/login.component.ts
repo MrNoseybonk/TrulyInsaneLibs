@@ -40,10 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.user = resp;
       this.loggedUser = this.user.username;
       this.loginService.changeMessage(this.loggedUser);
-      sessionStorage.setItem('currentUser', JSON.stringify(this.user));
     });
-    this.loginMessage = this.loggedUser;
-    this.loginService.changeMessage(this.loginMessage);
     document.getElementById('navLogout').style.display = 'unset';
     document.getElementById('prelog').style.display = 'none';
     this.username = '';

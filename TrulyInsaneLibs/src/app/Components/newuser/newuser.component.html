@@ -14,7 +14,7 @@
                 <input type="submit" id="registerbutton" [disabled]="registerForm.invalid" value="Register">
             </form>
         </div>
-        <div id="message" *ngIf=registerMessage><span>That username has already been taken. Please choose another one.</span></div>
+        <div id="message" *ngIf=registerMessage>{{registerMessage}}</div>
     </div>
     <div class="loggedIn" id="loggedIn">
         <p>You are already logged in.</p>
