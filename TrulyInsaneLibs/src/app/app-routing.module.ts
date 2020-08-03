@@ -5,10 +5,12 @@ import { FilecreateComponent } from './Components/filecreate/filecreate.componen
 import { FileuploadComponent } from './Components/fileupload/fileupload.component';
 import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
 import { SaveviewComponent } from './Components/saveview/saveview.component';
+import { NewuserComponent } from './Components/newuser/newuser.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'newuser', component: NewuserComponent},
   { path: 'filecreate', component: FilecreateComponent },
   { path: 'fileupload', component: FileuploadComponent},
   { path: 'savedcreate', component: SavedcreateComponent },

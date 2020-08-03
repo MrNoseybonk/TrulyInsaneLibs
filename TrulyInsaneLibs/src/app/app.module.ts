@@ -14,6 +14,7 @@ import { UrlService } from './url.service';
 import { FileuploadComponent } from './Components/fileupload/fileupload.component';
 import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
 import { SaveviewComponent } from './Components/saveview/saveview.component';
+import { NewuserComponent } from './Components/newuser/newuser.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SaveviewComponent } from './Components/saveview/saveview.component';
     FilecreateComponent,
     FileuploadComponent,
     SavedcreateComponent,
-    SaveviewComponent
+    SaveviewComponent,
+    NewuserComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
