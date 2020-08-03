@@ -10,7 +10,7 @@
                 <input type="submit" value="Prepare File">
             </form>
         </div>
-        <app-libcreate></app-libcreate>
+        <app-libcreate [file]="this.formGroup.get('file').value"></app-libcreate>
     </div>
     <div class="loggedOut" id="loggedOut">
         <p>Please login to use this functionality.</p>

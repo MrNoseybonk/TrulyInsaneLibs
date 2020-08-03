@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SavedcreateService } from 'src/app/savedcreate.service';
 import { FileuploadService } from 'src/app/fileupload.service';
 import { LibService } from 'src/app/lib.service';
@@ -68,6 +68,8 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   savedLib: Lib;
   savedName: string;
   saveRequest: SaveRequest;
+
+  @Input() file: string;
 
   // tslint:disable-next-line: max-line-length
   constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService, private fileCreate: FilecreateComponent) { }
@@ -182,10 +184,11 @@ export class LibcreateComponent implements OnInit, OnDestroy {
         });
       });
     }
-    else if (sessionStorage.getItem('fileName') != null && sessionStorage.getItem('file') != null)
+    else if (sessionStorage.getItem('fileName') != null && this.file)
     {
-      this.fileCreate.prepareFile();
-      this.startingLib = sessionStorage.getItem('file');
+      // console.log(this.file);
+      // this.fileCreate.prepareFile();
+      this.startingLib = this.file; //sessionStorage.getItem('file');
 
       console.log(sessionStorage.getItem('fileName'));
       console.log(this.startingLib);
