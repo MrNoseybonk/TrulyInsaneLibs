@@ -7,9 +7,7 @@
             <a class="fourthBtn" routerLink="/savedcreate">Create Insane Lib From A Saved Template</a>
             <a class="fifthBtn" routerLink="/savedview">View Your Saved Libs</a>
             <a class="sixthBtn" id="navLogout" routerLink="/" (click)="logout()">Logout</a>
-        </div>
-        <div class="loggedIn" *ngIf=loggedUsername>
-            {{loggedUsername}}
+            <span class="loggedIn" *ngIf=loggedUsername>Have fun, {{loggedUsername}}!</span>
         </div>
     </nav>
 </div>

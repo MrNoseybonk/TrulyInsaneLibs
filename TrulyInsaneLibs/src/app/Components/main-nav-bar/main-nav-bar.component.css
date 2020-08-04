@@ -3,7 +3,7 @@
     display: none;
 }
 
-.mainNav 
+.navButtonSection 
 {
     display: block;
     grid-template-columns: 1fr 1fr 1fr;
@@ -16,6 +16,7 @@
 
 .loggedIn
 {
+    margin-left: 10px;
     text-align: right;
 }
 
