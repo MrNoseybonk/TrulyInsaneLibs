@@ -30,7 +30,6 @@ public class PersonService
                   }
               });
 
-		System.out.println(p);
 		Example<Person> example = Example.of(p, modelMatcher.withIgnoreCase());
 		boolean exists = personDao.exists(example);
 		

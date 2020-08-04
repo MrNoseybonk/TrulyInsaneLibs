@@ -40,11 +40,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.user = resp;
       this.loggedUser = this.user.username;
       this.loginService.changeMessage(this.loggedUser);
+
+      document.getElementById('navLogout').style.display = 'unset';
+      document.getElementById('prelog').style.display = 'none';
+      this.username = '';
+      this.password = '';
+    }, err => {
+      if (err.status === 404)
+      {
+        alert('Incorrect username and password. Please try again.');
+      }
     });
-    document.getElementById('navLogout').style.display = 'unset';
-    document.getElementById('prelog').style.display = 'none';
-    this.username = '';
-    this.password = '';
   }
 
   ngOnDestroy()

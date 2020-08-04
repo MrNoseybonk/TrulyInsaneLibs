@@ -39,7 +39,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
   }
 
   onBlur(): void {
-    console.log(this.registerForm.get('username').value);
+    // console.log(this.registerForm.get('username').value);
     this.checkSub = this.newUserService.checkUsername(this.registerForm.get('username').value)
     .subscribe((resp) => {
       if (resp === true)
