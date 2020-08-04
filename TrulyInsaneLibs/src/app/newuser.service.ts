@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UrlService } from './url.service';
 import { map } from 'rxjs/operators';
 import { Person } from './Models/person';
+import { Username } from './Models/username';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class NewuserService {
   private currentUserSubject: BehaviorSubject<Person>;
   private messageSource = new BehaviorSubject(null);
   currentMessage = this.messageSource.asObservable();
+
+  name = Username;
 
   constructor(private http: HttpClient, private urlService: UrlService) {
     this.currentUserSubject = new BehaviorSubject<Person>(JSON.parse(localStorage.getItem('currentUser')));
@@ -25,6 +28,12 @@ export class NewuserService {
 
   register(username, password): Observable<any> {
     return this.http.post<any>(this.urlService.getUrl() + 'login/register', {username, password}).pipe(
+      map( resp => resp )
+    );
+  }
+
+  checkUsername(username): Observable<any> {
+    return this.http.get<any>(this.urlService.getUrl() + 'login/' + username).pipe(
       map( resp => resp )
     );
   }

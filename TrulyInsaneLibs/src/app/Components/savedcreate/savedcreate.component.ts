@@ -47,7 +47,6 @@ export class SavedcreateComponent implements OnInit, OnDestroy {
 
   public onChange(selection)
   {
-    // alert(selection);
     this.selection = selection;
   }
 

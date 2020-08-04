@@ -15,6 +15,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
   loggedUser: Person;
   newUser: Person;
   private registerSub: Subscription;
+  private checkSub: Subscription;
 
   public registerForm = this.fb.group({
     username: [null, Validators.required],
@@ -35,6 +36,21 @@ export class NewuserComponent implements OnInit, OnDestroy {
       document.getElementById('loggedIn').style.display = 'block';
       document.getElementById('loggedOut').style.display = 'none';
     }
+  }
+
+  onBlur(): void {
+    console.log(this.registerForm.get('username').value);
+    this.checkSub = this.newUserService.checkUsername(this.registerForm.get('username').value)
+    .subscribe((resp) => {
+      if (resp === true)
+      {
+        this.registerMessage = 'That username has already been taken. Please choose another one.';
+      }
+      else
+      {
+        this.registerMessage = null;
+      }
+    });
   }
 
   onSubmit(): void {
@@ -58,6 +74,10 @@ export class NewuserComponent implements OnInit, OnDestroy {
     if (this.registerSub)
     {
       this.registerSub.unsubscribe();
+    }
+    if (this.checkSub)
+    {
+      this.checkSub.unsubscribe();
     }
   }
 
