@@ -15,6 +15,8 @@ export class SavedcreateComponent implements OnInit, OnDestroy {
 
   loggedUser: Person;
 
+  selection: string;
+
   public formGroup = this.fb.group({
     selectedLib: [null, Validators.required]
   });
@@ -34,9 +36,6 @@ export class SavedcreateComponent implements OnInit, OnDestroy {
       document.getElementById('loggedOut').style.display = 'none';
       this.fillSelector();
     }
-
-    sessionStorage.removeItem('fileName');
-    sessionStorage.removeItem('file');
   }
 
   public fillSelector()
@@ -49,7 +48,7 @@ export class SavedcreateComponent implements OnInit, OnDestroy {
   public onChange(selection)
   {
     // alert(selection);
-    sessionStorage.setItem('selection', selection);
+    this.selection = selection;
   }
 
   ngOnDestroy()

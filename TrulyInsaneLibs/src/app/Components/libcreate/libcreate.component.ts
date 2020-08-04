@@ -70,6 +70,8 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   saveRequest: SaveRequest;
 
   @Input() file: string;
+  @Input() dbLibName: string;
+  @Input() selection: string;
 
   // tslint:disable-next-line: max-line-length
   constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService, private fileCreate: FilecreateComponent) { }
@@ -77,223 +79,127 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    if (sessionStorage.getItem('selection'))
-    {
-      this.getSub = this.savedCreateService.getLib(sessionStorage.getItem('selection')).subscribe((resp) => {
-        this.startingLib = resp.lib;
-        this.uploadSub = this.uploadService.upload(resp.libName, this.startingLib).subscribe((resp2) => {
-          this.totals = resp2;
+  uploadLib(libName: string)
+  {
+    // this gets this word totals and sets up the user inputs
+    this.uploadSub = this.uploadService.upload(libName, this.startingLib).subscribe((resp) => {
+      this.totals = resp;
 
-          this.nounsArr = new Array();
-          this.pluralsArr = new Array();
-          this.verbsArr = new Array();
-          this.adjArr = new Array();
-          this.colorsArr = new Array();
-          this.ingsArr = new Array();
-          this.adverbsArr = new Array();
-          this.propArr = new Array();
-          this.numbArr = new Array();
-          this.pastsArr = new Array();
-          this.foodsArr = new Array();
-          this.liquidsArr = new Array();
+      this.nounsArr = new Array();
+      this.pluralsArr = new Array();
+      this.verbsArr = new Array();
+      this.adjArr = new Array();
+      this.colorsArr = new Array();
+      this.ingsArr = new Array();
+      this.adverbsArr = new Array();
+      this.propArr = new Array();
+      this.numbArr = new Array();
+      this.pastsArr = new Array();
+      this.foodsArr = new Array();
+      this.liquidsArr = new Array();
 
-          for (let i = 0; i < (this.totals.nouns); i++)
-          {
-            this.nounsArr.push({
-              noun: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.plurals); i++)
-          {
-            this.pluralsArr.push({
-              plural: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.verbs); i++)
-          {
-            this.verbsArr.push({
-              verb: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.adjectives); i++)
-          {
-            this.adjArr.push({
-              adjective: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.colors); i++)
-          {
-            this.colorsArr.push({
-              color: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.ings); i++)
-          {
-            this.ingsArr.push({
-              ing: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.adverbs); i++)
-          {
-            this.adverbsArr.push({
-              adverb: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.propers); i++)
-          {
-            this.propArr.push({
-              proper: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.numbers); i++)
-          {
-            this.numbArr.push({
-              number: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.pasts); i++)
-          {
-            this.pastsArr.push({
-              past: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.foods); i++)
-          {
-            this.foodsArr.push({
-              food: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.liquids); i++)
-          {
-            this.liquidsArr.push({
-              liquid: ''
-            });
-          }
+      for (let i = 0; i < (this.totals.nouns); i++)
+      {
+        this.nounsArr.push({
+          noun: ''
         });
+      }
+
+      for (let i = 0; i < (this.totals.plurals); i++)
+      {
+        this.pluralsArr.push({
+          plural: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.verbs); i++)
+      {
+        this.verbsArr.push({
+          verb: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.adjectives); i++)
+      {
+        this.adjArr.push({
+          adjective: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.colors); i++)
+      {
+        this.colorsArr.push({
+          color: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.ings); i++)
+      {
+        this.ingsArr.push({
+          ing: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.adverbs); i++)
+      {
+        this.adverbsArr.push({
+          adverb: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.propers); i++)
+      {
+        this.propArr.push({
+          proper: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.numbers); i++)
+      {
+        this.numbArr.push({
+          number: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.pasts); i++)
+      {
+        this.pastsArr.push({
+          past: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.foods); i++)
+      {
+        this.foodsArr.push({
+          food: ''
+        });
+      }
+
+      for (let i = 0; i < (this.totals.liquids); i++)
+      {
+        this.liquidsArr.push({
+          liquid: ''
+        });
+      }
+    });
+  }
+
+  onSubmit(): void {
+    if (this.selection)
+    {
+      this.getSub = this.savedCreateService.getLib(this.selection).subscribe((resp) => {
+        this.startingLib = resp.lib;
+        this.uploadLib(resp.libName);
       });
     }
-    else if (sessionStorage.getItem('fileName') != null && this.file)
+    else if (this.dbLibName && this.file)
     {
       // console.log(this.file);
-      // this.fileCreate.prepareFile();
-      this.startingLib = this.file; //sessionStorage.getItem('file');
+      // console.log(this.dbLibName);
+      this.startingLib = this.file;
 
-      console.log(sessionStorage.getItem('fileName'));
-      console.log(this.startingLib);
-      this.uploadSub = this.uploadService.upload(sessionStorage.getItem('fileName'), this.startingLib).subscribe((resp2) => {
-          this.totals = resp2;
-
-          console.log(this.totals);
-
-          this.nounsArr = new Array();
-          this.pluralsArr = new Array();
-          this.verbsArr = new Array();
-          this.adjArr = new Array();
-          this.colorsArr = new Array();
-          this.ingsArr = new Array();
-          this.adverbsArr = new Array();
-          this.propArr = new Array();
-          this.numbArr = new Array();
-          this.pastsArr = new Array();
-          this.foodsArr = new Array();
-          this.liquidsArr = new Array();
-
-          for (let i = 0; i < (this.totals.nouns); i++)
-          {
-            this.nounsArr.push({
-              noun: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.plurals); i++)
-          {
-            this.pluralsArr.push({
-              plural: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.verbs); i++)
-          {
-            this.verbsArr.push({
-              verb: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.adjectives); i++)
-          {
-            this.adjArr.push({
-              adjective: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.colors); i++)
-          {
-            this.colorsArr.push({
-              color: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.ings); i++)
-          {
-            this.ingsArr.push({
-              ing: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.adverbs); i++)
-          {
-            this.adverbsArr.push({
-              adverb: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.propers); i++)
-          {
-            this.propArr.push({
-              proper: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.numbers); i++)
-          {
-            this.numbArr.push({
-              number: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.pasts); i++)
-          {
-            this.pastsArr.push({
-              past: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.foods); i++)
-          {
-            this.foodsArr.push({
-              food: ''
-            });
-          }
-
-          for (let i = 0; i < (this.totals.liquids); i++)
-          {
-            this.liquidsArr.push({
-              liquid: ''
-            });
-          }
-        });
+      // console.log(this.startingLib);
+      this.uploadLib(this.dbLibName);
     }
 
     const inputs = document.getElementById('inputs');

@@ -5,12 +5,11 @@
             <p>Please upload your txt file to be used.</p>
         </div>
         <div class="uploader">
-            <form [formGroup] = "formGroup" (ngSubmit)="prepareFile()">
+            <form [formGroup] = "formGroup">
                 <input type="file" accept=".txt" (change)="onFileChange($event)" />
-                <input type="submit" value="Prepare File">
             </form>
         </div>
-        <app-libcreate [file]="this.formGroup.get('file').value"></app-libcreate>
+        <app-libcreate [file]="this.formGroup.get('file').value" [dbLibName]="this.fileName"></app-libcreate>
     </div>
     <div class="loggedOut" id="loggedOut">
         <p>Please login to use this functionality.</p>
