@@ -7,7 +7,6 @@ import { Words } from 'src/app/Models/words';
 import { Person } from 'src/app/Models/person';
 import { Lib } from 'src/app/Models/lib';
 import { SaveRequest } from 'src/app/Models/save-request';
-import { FilecreateComponent } from 'src/app/Components/filecreate/filecreate.component';
 
 @Component({
   selector: 'app-libcreate',
@@ -74,7 +73,7 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   @Input() selection: string;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService, private fileCreate: FilecreateComponent) { }
+  constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
 
   ngOnInit(): void {
   }

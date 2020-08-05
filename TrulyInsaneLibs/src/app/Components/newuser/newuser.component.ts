@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Person } from 'src/app/Models/person';
 import { NewuserService } from 'src/app/newuser.service';
-import { Router } from '@angular/router';
+import { ModalService } from '../../modal.service';
 
 @Component({
   selector: 'app-newuser',
@@ -22,7 +22,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
     password: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private newUserService: NewuserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private newUserService: NewuserService, private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -61,7 +61,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
       if (this.newUser.id !== -1)
       {
         alert('You have registered!');
-        this.router.navigate(['']);
+        this.modalService.destroy();
       }
       else
       {

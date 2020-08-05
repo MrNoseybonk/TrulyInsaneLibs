@@ -16,6 +16,8 @@ import { SavedcreateComponent } from './Components/savedcreate/savedcreate.compo
 import { SaveviewComponent } from './Components/saveview/saveview.component';
 import { NewuserComponent } from './Components/newuser/newuser.component';
 import { LibcreateComponent } from './Components/libcreate/libcreate.component';
+import { ModalService } from './modal.service';
+import { DomService } from './dom.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { LibcreateComponent } from './Components/libcreate/libcreate.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LibService, LoginService, UrlService, FilecreateComponent],
+  providers: [LibService, LoginService, UrlService, ModalService, DomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

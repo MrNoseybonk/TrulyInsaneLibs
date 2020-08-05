@@ -13,7 +13,7 @@
             <label for="username" id="namelabel">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
             <label for="password" id="passlabel">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
             <button id="loginbutton" (click)="login()">Login</button>
-            <a class="register" routerLink="newuser">Register A New Account</a>
+            <button id="register" class="register" (click)="register()">Register A New Account</button>
         </div>
     </div>
     <div id="welcome" *ngIf=loggedUser><span>Welcome {{loggedUser}}!</span></div>

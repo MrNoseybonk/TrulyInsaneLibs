@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login.service';
+import { ModalService } from '../../modal.service';
 import { Person } from '../../Models/person';
-import { Router } from '@angular/router';
+import { NewuserComponent } from '../newuser/newuser.component';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loggedUser: string;
   loginMessage: string;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
@@ -30,6 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     {
       document.getElementById('prelog').style.display = 'none';
     }
+  }
+
+  register()
+  {
+    this.modalService.init(NewuserComponent, null, null);
   }
 
   login()
