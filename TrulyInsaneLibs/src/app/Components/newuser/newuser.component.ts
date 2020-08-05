@@ -70,6 +70,11 @@ export class NewuserComponent implements OnInit, OnDestroy {
     });
   }
 
+  cancel()
+  {
+    this.modalService.destroy();
+  }
+
   ngOnDestroy(): void {
     if (this.registerSub)
     {

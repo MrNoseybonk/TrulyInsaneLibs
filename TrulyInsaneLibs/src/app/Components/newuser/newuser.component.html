@@ -12,6 +12,7 @@
                 <label for="username" id="namelabel">Username</label><input type="text" id="username" (blur)="onBlur()" formControlName="username"><br>
                 <label for="password" id="passlabel">Password</label><input type="password" id="password" formControlName="password"><br>
                 <input type="submit" id="registerbutton" [disabled]="registerForm.invalid" value="Register">
+                <button id="cancelButton" (click)="cancel()">Cancel</button>
             </form>
         </div>
         <div id="message" *ngIf=registerMessage>{{registerMessage}}</div>
