@@ -49,6 +49,7 @@ export class DomService {
     for (const key in inputs) {
       componentRef.instance[key] = inputs[key];
     }
+
     for (const key in outputs) {
       componentRef.instance[key] = outputs[key];
     }

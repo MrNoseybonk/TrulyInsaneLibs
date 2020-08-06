@@ -8,6 +8,7 @@
                 <select size="10" id="viewList" formControlName="selectedLib">
                     <option value={{choice.id}} id="option_{{choice.id}}" *ngFor="let choice of viewChoices">{{choice.savedName}}</option>
                 </select>
+                <br>
                 <input type="submit" [disabled]="formGroup.invalid" value="Select Lib" />
             </form>
         </div>

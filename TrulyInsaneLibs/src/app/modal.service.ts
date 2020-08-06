@@ -11,8 +11,8 @@ export class ModalService {
 
   init(component: any, inputs: any, outputs: any) {
     const componentConfig = {
-      inputs: inputs,
-      outputs: outputs
+      inputs,
+      outputs
     };
 
     this.domService.appendComponentTo(this.modalElementId, component, componentConfig);

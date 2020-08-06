@@ -60,7 +60,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
       console.log(this.newUser);
       if (this.newUser.id !== -1)
       {
-        alert('You have registered!');
+        alert('You have registered! You can now login.');
         this.modalService.destroy();
       }
       else

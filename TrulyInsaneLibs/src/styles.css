@@ -5,9 +5,16 @@ pre
     text-align : left;
  }
 
+ body
+{
+    background-color: teal;
+}
+
  .body
  {
-     width: 70%;
-     margin-left: 30%;
+     width: 50%;
+     margin-left: 25%;
      margin-top: 5%;
+     background-color: turquoise;
+     text-align: center;
  }
