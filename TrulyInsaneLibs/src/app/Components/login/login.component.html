@@ -10,10 +10,12 @@
         </div>
         <div class="login" id="login">
             <p>Please login.</p>
-            <label for="username" id="namelabel">Username</label><input type="text" id="username" [(ngModel)]="username"><br>
-            <label for="password" id="passlabel">Password</label><input type="password" id="password" [(ngModel)]="password"><br>
-            <button id="loginbutton" (click)="login()">Login</button>
-            <button id="register" class="register" (click)="register()">Register A New Account</button>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <label for="username" id="namelabel">Username</label><input type="text" id="username" formControlName="username"><br>
+                <label for="password" id="passlabel">Password</label><input type="password" id="password" formControlName="password"><br>
+                <input type="submit" id="loginbutton" [disabled]="loginForm.invalid" value="Login">
+                <button id="register" class="register" type="button" (click)="register()">Register A New Account</button>
+            </form>
         </div>
     </div>
     <div id="welcome" *ngIf=loggedUser><span>Welcome {{loggedUser}}!</span></div>

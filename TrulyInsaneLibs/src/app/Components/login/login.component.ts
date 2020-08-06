@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/login.service';
 import { ModalService } from '../../modal.service';
 import { Person } from '../../Models/person';
@@ -12,13 +13,16 @@ import { NewuserComponent } from '../newuser/newuser.component';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private loginSub: Subscription;
-  username: string;
-  password: string;
   user: Person;
   loggedUser: string;
   loginMessage: string;
 
-  constructor(private loginService: LoginService, private modalService: ModalService) { }
+  public loginForm = this.fb.group({
+    username: [null, Validators.required],
+    password: [null, Validators.required]
+  });
+
+  constructor(private loginService: LoginService, private modalService: ModalService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
@@ -41,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login()
   {
     this.loginSub = this.loginService
-    .login(this.username, this.password)
+    .login(this.loginForm.get('username').value, this.loginForm.get('password').value)
     .subscribe((resp) => {
       this.user = resp;
       this.loggedUser = this.user.username;
@@ -49,8 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       document.getElementById('navLogout').style.display = 'unset';
       document.getElementById('prelog').style.display = 'none';
-      this.username = '';
-      this.password = '';
+      this.loginForm.get('username').reset();
+      this.loginForm.get('password').reset();
     }, err => {
       if (err.status === 404)
       {

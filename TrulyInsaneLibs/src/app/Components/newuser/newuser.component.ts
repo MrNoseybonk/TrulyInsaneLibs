@@ -57,7 +57,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
     this.registerSub = this.newUserService.register(this.registerForm.get('username').value, this.registerForm.get('password').value)
     .subscribe((resp) => {
       this.newUser = resp;
-      console.log(this.newUser);
+      // console.log(this.newUser);
       if (this.newUser.id !== -1)
       {
         alert('You have registered! You can now login.');
@@ -65,7 +65,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
       }
       else
       {
-        this.registerMessage = 'That username has already been taken. Please choose another one.';
+        alert('That username has already been taken. Please choose another one.');
       }
     });
   }

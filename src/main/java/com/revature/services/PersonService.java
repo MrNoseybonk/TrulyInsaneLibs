@@ -39,7 +39,7 @@ public class PersonService
 	public Integer addPerson(Person p)
 	{
 		ExampleMatcher modelMatcher = ExampleMatcher.matching()
-				  .withIgnorePaths("id") 
+				  .withIgnorePaths("id", "password") 
 				  .withMatcher("username", new ExampleMatcher.MatcherConfigurer<ExampleMatcher.GenericPropertyMatcher>() {
                     @Override
                     public void configureMatcher(ExampleMatcher.GenericPropertyMatcher matcher) {
