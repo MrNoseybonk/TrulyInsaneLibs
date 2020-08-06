@@ -1,13 +1,15 @@
 <div class="body">
     <div class="loggedIn" id="loggedIn">
-        <div class="intro">
-            <h2>Lib Creation With A Local File</h2>
-            <p>Please upload your txt file to be used.</p>
-        </div>
-        <div class="uploader">
-            <form [formGroup] = "formGroup">
-                <input type="file" accept=".txt" (change)="onFileChange($event)" />
-            </form>
+        <div class="filecreate">
+            <div class="intro">
+                <h2>Lib Creation With A Local File</h2>
+                <p>Please upload your txt file to be used.</p>
+            </div>
+            <div class="uploader">
+                <form [formGroup] = "formGroup">
+                    <input type="file" accept=".txt" (change)="onFileChange($event)" />
+                </form>
+            </div>
         </div>
         <app-libcreate [file]="this.formGroup.get('file').value" [dbLibName]="this.fileName"></app-libcreate>
     </div>

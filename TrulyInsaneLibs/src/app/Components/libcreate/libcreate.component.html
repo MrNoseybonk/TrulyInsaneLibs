@@ -36,10 +36,10 @@
     <div class="liquids" *ngFor="let liquid of liquidsArr; let i = index">
         <label class="liquidLabel">Liquid</label><input class="input" type="text" id="liquid_{{i}}" maxlength="23" placeholder="e.g. water, milk, sweat, etc." [(ngModel)]=liquid.liquid>
     </div>
-    <button type="button" (click)="onCreate()">Create Insane Lib</button>
+    <button type="button" id="createbutton" (click)="onCreate()">Create Insane Lib</button>
 </div>
 <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>
     <pre id="finished">{{finishedLib}}</pre>
     <label for="savedName" id="savedlabel">Lib Name</label><input type="text" class="input" id="savedName" maxlength="25" [(ngModel)]=savedName>
-    <button type="button" (click)="saveLib()">Save Insane Lib</button>
+    <button type="button" id="savebutton" (click)="saveLib()">Save Insane Lib</button>
 </div>
