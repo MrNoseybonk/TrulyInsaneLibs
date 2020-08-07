@@ -18,6 +18,12 @@
     margin:5px 0px;
 }
 
+#savebutton
+{
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
 .input
 {
     width: 210px;
