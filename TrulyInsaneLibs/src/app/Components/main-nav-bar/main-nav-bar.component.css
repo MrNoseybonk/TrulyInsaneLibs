@@ -3,9 +3,9 @@
     display: none;
 }
 
-.mainNav 
+.navButtonSection 
 {
-    display: grid;
+    display: block;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -16,6 +16,7 @@
 
 .loggedIn
 {
+    margin-left: 10px;
     text-align: right;
 }
 
@@ -26,9 +27,9 @@
     padding-bottom: 10px;
     padding-right: 8px;
     padding-top: 10px;
-    background-color: white;
+    background-color: springgreen;
     margin-left: -10px;
     margin-top: -10px;
-    white-space: nowrap;
+    white-space: normal;
     box-shadow: 2px 1px 3px black;
 }

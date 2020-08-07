@@ -14,6 +14,10 @@ import { UrlService } from './url.service';
 import { FileuploadComponent } from './Components/fileupload/fileupload.component';
 import { SavedcreateComponent } from './Components/savedcreate/savedcreate.component';
 import { SaveviewComponent } from './Components/saveview/saveview.component';
+import { NewuserComponent } from './Components/newuser/newuser.component';
+import { LibcreateComponent } from './Components/libcreate/libcreate.component';
+import { ModalService } from './modal.service';
+import { DomService } from './dom.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { SaveviewComponent } from './Components/saveview/saveview.component';
     FilecreateComponent,
     FileuploadComponent,
     SavedcreateComponent,
-    SaveviewComponent
+    SaveviewComponent,
+    NewuserComponent,
+    LibcreateComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -33,7 +39,7 @@ import { SaveviewComponent } from './Components/saveview/saveview.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LibService, LoginService, UrlService],
+  providers: [LibService, LoginService, UrlService, ModalService, DomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

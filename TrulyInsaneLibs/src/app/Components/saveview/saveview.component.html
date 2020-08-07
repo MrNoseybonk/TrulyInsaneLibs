@@ -1,6 +1,7 @@
 <div class="body">
     <div class="loggedIn" id="loggedIn">
         <div class="intro">
+            <h2>View Saved Lib</h2>
             <p>Select a Lib from the list to pick which one you want to view.</p>
         </div>
         <div class="selector">
@@ -8,7 +9,8 @@
                 <select size="10" id="viewList" formControlName="selectedLib">
                     <option value={{choice.id}} id="option_{{choice.id}}" *ngFor="let choice of viewChoices">{{choice.savedName}}</option>
                 </select>
-                <input type="submit" [disabled]="formGroup.invalid" value="Select Lib" />
+                <br>
+                <input id="selectbutton" type="submit" [disabled]="formGroup.invalid" value="Select Lib" />
             </form>
         </div>
         <div class="finishedLib" id="finishedLib" *ngIf=finishedLib>

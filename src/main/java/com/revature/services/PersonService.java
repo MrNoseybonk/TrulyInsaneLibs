@@ -19,10 +19,27 @@ public class PersonService
 		personDao = p;
 	}
 	
+	public boolean checkUsername(Person p)
+	{
+		ExampleMatcher modelMatcher = ExampleMatcher.matching()
+				  .withIgnorePaths("id", "password") 
+				  .withMatcher("username", new ExampleMatcher.MatcherConfigurer<ExampleMatcher.GenericPropertyMatcher>() {
+                  @Override
+                  public void configureMatcher(ExampleMatcher.GenericPropertyMatcher matcher) {
+                      matcher.endsWith();
+                  }
+              });
+
+		Example<Person> example = Example.of(p, modelMatcher.withIgnoreCase());
+		boolean exists = personDao.exists(example);
+		
+		return exists;
+	}
+	
 	public Integer addPerson(Person p)
 	{
 		ExampleMatcher modelMatcher = ExampleMatcher.matching()
-				  .withIgnorePaths("id") 
+				  .withIgnorePaths("id", "password") 
 				  .withMatcher("username", new ExampleMatcher.MatcherConfigurer<ExampleMatcher.GenericPropertyMatcher>() {
                     @Override
                     public void configureMatcher(ExampleMatcher.GenericPropertyMatcher matcher) {
