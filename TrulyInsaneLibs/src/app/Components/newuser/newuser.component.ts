@@ -18,8 +18,8 @@ export class NewuserComponent implements OnInit, OnDestroy {
   private checkSub: Subscription;
 
   public registerForm = this.fb.group({
-    username: [null, Validators.required],
-    password: [null, Validators.required]
+    regUsername: [null, Validators.required],
+    regPassword: [null, Validators.required]
   });
 
   constructor(private fb: FormBuilder, private newUserService: NewuserService, private modalService: ModalService) { }
@@ -40,7 +40,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
 
   onBlur(): void {
     // console.log(this.registerForm.get('username').value);
-    this.checkSub = this.newUserService.checkUsername(this.registerForm.get('username').value)
+    this.checkSub = this.newUserService.checkUsername(this.registerForm.get('regUsername').value)
     .subscribe((resp) => {
       if (resp === true)
       {
@@ -54,7 +54,7 @@ export class NewuserComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.registerSub = this.newUserService.register(this.registerForm.get('username').value, this.registerForm.get('password').value)
+    this.registerSub = this.newUserService.register(this.registerForm.get('regUsername').value, this.registerForm.get('regPassword').value)
     .subscribe((resp) => {
       this.newUser = resp;
       // console.log(this.newUser);
