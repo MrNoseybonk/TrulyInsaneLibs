@@ -24,7 +24,7 @@ public class TrulyInsaneLibs
 			public void addCorsMappings(CorsRegistry registry) 
 			{
 				registry.addMapping("/**").allowedMethods("GET", "OPTIONS", "PUT", "POST", "PATCH", "DELETE")
-					.allowedOrigins("http://localhost:4200").allowedHeaders("*").allowCredentials(true);
+					.allowedOrigins("http://localhost:4200", "http://localhost:4300").allowedHeaders("*").allowCredentials(true);
 			}
 		};
 	}
