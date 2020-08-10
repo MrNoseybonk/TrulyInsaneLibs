@@ -12,11 +12,17 @@ export class LoginService {
   public currentUser: Observable<Person>;
   private currentUserSubject: BehaviorSubject<Person>;
   private messageSource = new BehaviorSubject(null);
+  private user: Person;
   currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient, private urlService: UrlService) {
     this.currentUserSubject = new BehaviorSubject<Person>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
+    if (localStorage.getItem('currentUser') != null)
+    {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.changeMessage(this.user.username);
+    }
    }
 
    changeMessage(message: string) {

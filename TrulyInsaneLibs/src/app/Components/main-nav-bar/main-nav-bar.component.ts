@@ -17,6 +17,11 @@ export class MainNavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currentMessage.subscribe(message => this.loggedUsername = message);
+
+    if (this.loggedUsername != null)
+    {
+      document.getElementById('navLogout').style.display = 'inline';
+    }
   }
 
   logout()

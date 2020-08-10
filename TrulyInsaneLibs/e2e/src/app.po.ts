@@ -86,4 +86,9 @@ navigateToSaveView()
 {
   element(by.routerLink('/savedview')).click();
 }
+
+clickLogout()
+{
+  element(by.id('navLogout')).click();
+}
 }

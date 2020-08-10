@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, element, by } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('workspace-project App tests', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -51,6 +51,13 @@ describe('workspace-project App', () => {
     page.navigateTo();
     page.navigateToSaveView();
     expect(page.getWelcome()).toEqual('View Saved Lib');
+  });
+
+  it('should not display a logged in message after logging out', () => {
+    expect(element(by.css('span.loggedIn')).isPresent()).toBe(true);
+    page.clickLogout();
+    browser.switchTo().alert().dismiss();
+    expect(element(by.css('span.loggedIn')).isPresent()).toBe(false);
   });
 
   afterEach(async () => {

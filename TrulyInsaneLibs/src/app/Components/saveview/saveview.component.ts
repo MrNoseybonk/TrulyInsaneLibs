@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SaveviewService } from '../../saveview.service';
+import { LoginService } from '../../login.service';
 import { Person } from 'src/app/Models/person';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saveview',
@@ -23,9 +23,10 @@ export class SaveviewComponent implements OnInit, OnDestroy {
     selectedLib: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private saveViewService: SaveviewService, private router: Router) { }
+  constructor(private loginService: LoginService, private fb: FormBuilder, private saveViewService: SaveviewService) { }
 
   ngOnInit(): void {
+    // this.loginService.currentMessage.subscribe(message => this.loggedUser = message);
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     if (this.loggedUser == null)
     {
