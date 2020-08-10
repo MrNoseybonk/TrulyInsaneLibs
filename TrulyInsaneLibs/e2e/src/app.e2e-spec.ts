@@ -10,7 +10,15 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('TrulyInsaneLibs app is running!');
+    expect(page.getTitleText()).toEqual('Welcome to Truly InsaneLibs!');
+  });
+
+  it('should display user welcome message', () => {
+    page.navigateTo();
+    page.setUsername();
+    page.setPassword();
+    page.clickLoginButton();
+    expect(page.getUserWelcome()).toEqual('Welcome swilson!');
   });
 
   afterEach(async () => {
