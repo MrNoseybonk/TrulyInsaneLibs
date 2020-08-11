@@ -1,4 +1,4 @@
-<input type="submit" value="Select Lib" id="getLib" (click)="onSubmit()">
+<input type="submit" value="Select Lib" id="getlib" (click)="onSubmit()">
 <div class="inputs" id="inputs" *ngIf=totals>
     <div class="nouns" *ngFor="let noun of nounsArr; let i = index">
         <label class="nounLabel">Noun</label><input class="input" type="text" id="noun_{{i}}" maxlength="23" placeholder="e.g. cat, box, house, etc." [(ngModel)]=noun.noun>

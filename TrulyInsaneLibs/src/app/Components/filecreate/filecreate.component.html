@@ -11,7 +11,7 @@
                 </form>
             </div>
         </div>
-        <app-libcreate [file]="this.formGroup.get('file').value" [dbLibName]="this.fileName"></app-libcreate>
+        <app-libcreate id="libcreate" [file]="this.formGroup.get('file').value" [dbLibName]="this.fileName"></app-libcreate>
     </div>
     <div class="loggedOut" id="loggedOut">
         <p>Please login to use this functionality.</p>

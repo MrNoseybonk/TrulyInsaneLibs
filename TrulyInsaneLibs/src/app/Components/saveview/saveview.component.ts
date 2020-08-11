@@ -60,11 +60,11 @@ export class SaveviewComponent implements OnInit, OnDestroy {
   {
     this.deleteSub = this.saveViewService.deleteView(this.formGroup.get('selectedLib').value).subscribe(() => {
       alert('Lib deleted.');
+      window.location.reload();
     },
     message => {
       alert('The Lib wasn\'t deleted correctly. Please try again.');
     });
-    window.location.reload();
   }
 
   ngOnDestroy()

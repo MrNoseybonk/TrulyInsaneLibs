@@ -166,4 +166,29 @@ getFinishedLib(): Promise<string>
 {
   return element(by.id('finished')).getText() as Promise<string>;
 }
+
+setSavedLibName()
+{
+  element(by.id('savedName')).sendKeys('Protractor Testing');
+}
+
+clickSaveButton()
+{
+  element(by.id('savebutton')).click();
+}
+
+setSavedLibToView()
+{
+  element(by.cssContainingText('.selectoption', 'Protractor Testing')).click();
+}
+
+clickSelectButton()
+{
+  element(by.id('selectbutton')).click();
+}
+
+clickDeleteButton()
+{
+  element(by.id('deletebutton')).click();
+}
 }

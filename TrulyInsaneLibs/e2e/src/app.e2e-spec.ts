@@ -1,5 +1,6 @@
 import { AppPage } from './app.po';
 import { browser, logging, element, by } from 'protractor';
+import { isRegExp } from 'util';
 
 describe('workspace-project App tests', () => {
   let page: AppPage;
@@ -56,6 +57,15 @@ describe('workspace-project App tests', () => {
     expect(page.getFinishedLib()).toEqual('The tiny purple dog ran over the lazy dog.');
   });
 
+  it('should display the correct alert after saving a finished lib', () => {
+    page.setSavedLibName();
+    page.clickSaveButton();
+    browser.sleep(250);
+    const alerttext = browser.switchTo().alert().getText().then.toString();
+    browser.switchTo().alert().dismiss();
+    expect(alerttext === 'Lib saved!');
+  });
+
   it('should display file upload welcome message', () => {
     page.navigateTo();
     page.navigateToFileUpload();
@@ -72,6 +82,21 @@ describe('workspace-project App tests', () => {
     page.navigateTo();
     page.navigateToSaveView();
     expect(page.getWelcome()).toEqual('View Saved Lib');
+  });
+
+  it('should display the saved lib after clicking the select lib button', () => {
+    page.setSavedLibToView();
+    page.clickSelectButton();
+    expect(page.getFinishedLib()).toEqual('The tiny purple dog ran over the lazy dog.');
+  });
+
+  it('should display the correct alert after deleting a saved lib', () => {
+    page.clickDeleteButton();
+
+    browser.sleep(250);
+    const alerttext = browser.switchTo().alert().getText().then.toString();
+    browser.switchTo().alert().dismiss();
+    expect(alerttext === 'Lib deleted.');
   });
 
   it('should not display a logged in message after logging out', () => {
