@@ -4,6 +4,8 @@ import { browser, logging, element, by } from 'protractor';
 describe('workspace-project App tests', () => {
   let page: AppPage;
 
+  const path = require('path');
+
   beforeEach(() => {
     page = new AppPage();
   });
@@ -35,6 +37,25 @@ describe('workspace-project App tests', () => {
     expect(page.getWelcome()).toEqual('Lib Creation With A Local File');
   });
 
+  it('should upload a file and be ready to create a lib', () => {
+    const fileToUpload = 'D://testing/test2.txt';
+    const absolutePath = path.resolve(process.cwd(), fileToUpload);
+
+    page.chooseFileCreate(absolutePath);
+    page.clickSelectLibButton();
+    browser.wait(element(by.id('createbutton')).isPresent(), 5000, 'The create lib button is not visible.');
+    expect(page.seeCreateButton()).toEqual(true);
+  });
+
+  it('should display the finished lib after clicking Create Insane Lib', () => {
+    page.setNoun();
+    page.setAdjective();
+    page.setColor();
+    page.setPastVerb();
+    page.clickCreateButton();
+    expect(page.getFinishedLib()).toEqual('The tiny purple dog ran over the lazy dog.');
+  });
+
   it('should display file upload welcome message', () => {
     page.navigateTo();
     page.navigateToFileUpload();
@@ -54,10 +75,10 @@ describe('workspace-project App tests', () => {
   });
 
   it('should not display a logged in message after logging out', () => {
-    expect(element(by.css('span.loggedIn')).isPresent()).toBe(true);
+    expect(page.getLoggedInMessage()).toEqual(true);
     page.clickLogout();
     browser.switchTo().alert().dismiss();
-    expect(element(by.css('span.loggedIn')).isPresent()).toBe(false);
+    expect(page.getLoggedInMessage()).toEqual(false);
   });
 
   afterEach(async () => {
