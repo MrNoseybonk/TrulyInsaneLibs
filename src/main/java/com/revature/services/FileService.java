@@ -33,4 +33,9 @@ public class FileService
 	{
 		return libTemplateDao.findAll();
 	}
+	
+	public void deleteLibTemplate(LibTemplate l)
+	{
+		libTemplateDao.delete(l);
+	}
 }
