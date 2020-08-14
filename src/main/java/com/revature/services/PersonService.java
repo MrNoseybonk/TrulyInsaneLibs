@@ -22,7 +22,7 @@ public class PersonService
 	public boolean checkUsername(Person p)
 	{
 		ExampleMatcher modelMatcher = ExampleMatcher.matching()
-				  .withIgnorePaths("id", "password") 
+				  .withIgnorePaths("id", "password", "userType") 
 				  .withMatcher("username", new ExampleMatcher.MatcherConfigurer<ExampleMatcher.GenericPropertyMatcher>() {
                   @Override
                   public void configureMatcher(ExampleMatcher.GenericPropertyMatcher matcher) {
@@ -39,7 +39,7 @@ public class PersonService
 	public Integer addPerson(Person p)
 	{
 		ExampleMatcher modelMatcher = ExampleMatcher.matching()
-				  .withIgnorePaths("id", "password") 
+				  .withIgnorePaths("id", "password", "userType") 
 				  .withMatcher("username", new ExampleMatcher.MatcherConfigurer<ExampleMatcher.GenericPropertyMatcher>() {
                     @Override
                     public void configureMatcher(ExampleMatcher.GenericPropertyMatcher matcher) {

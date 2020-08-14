@@ -34,4 +34,9 @@ export class FileuploadService {
       .pipe(map( resp => resp ));
     }
    }
+
+   public deleteTemplate(id: string): Observable<any>
+   {
+    return this.http.delete(this.urlService.getUrl() + 'file/delete/' + id, {headers: this.regHeaders, withCredentials: true });
+   }
 }

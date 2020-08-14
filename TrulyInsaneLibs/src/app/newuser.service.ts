@@ -24,7 +24,8 @@ export class NewuserService {
   }
 
   register(username, password): Observable<any> {
-    return this.http.post<any>(this.urlService.getUrl() + 'login/register', {username, password}).pipe(
+    const userType = 2;
+    return this.http.post<any>(this.urlService.getUrl() + 'login/register', {username, password, userType}).pipe(
       map( resp => resp )
     );
   }

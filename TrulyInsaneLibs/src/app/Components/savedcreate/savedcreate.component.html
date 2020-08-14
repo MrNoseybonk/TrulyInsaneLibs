@@ -7,7 +7,7 @@
         <div class="selector">
             <form [formGroup] = "formGroup">
                 <select size="10" id="libList" formControlName="selectedLib" (change)="onChange($event.target.value)">
-                    <option value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
+                    <option class="selectoption" value={{choice.id}} *ngFor="let choice of libChoices">{{choice.libName}}</option>
                 </select>
             </form>
         </div>
