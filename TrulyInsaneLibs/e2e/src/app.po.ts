@@ -97,9 +97,24 @@ clickChooseFileButton()
   element(by.buttonText('Choose File')).click();
 }
 
-chooseFileCreate(absolutePath)
+chooseFile(absolutePath)
 {
   element(by.css('input[type="file"]')).sendKeys(absolutePath);
+}
+
+setLibName()
+{
+  element(by.id('libname')).sendKeys('Protractor Test Template');
+}
+
+getUploadButtonIsEnabled(): Promise<boolean>
+{
+  return element(by.id('uploadbutton')).isEnabled() as Promise<boolean>;
+}
+
+clickUploadButton()
+{
+  element(by.id('uploadbutton')).click();
 }
 
 clickSelectLibButton()
@@ -175,6 +190,21 @@ setSavedLibName()
 clickSaveButton()
 {
   element(by.id('savebutton')).click();
+}
+
+setLibTemplateToUse()
+{
+  element(by.cssContainingText('.selectoption', 'Protractor Test Template')).click();
+}
+
+clickDeleteTemplateButton()
+{
+  element(by.id('deletetemplate')).click();
+}
+
+getLibTemplateId(): Promise<string>
+{
+  return element(by.cssContainingText('.selectoption', 'Protractor Test Template')).getAttribute('value') as Promise<string>;
 }
 
 setSavedLibToView()
