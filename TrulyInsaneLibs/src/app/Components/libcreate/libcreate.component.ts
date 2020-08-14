@@ -20,6 +20,7 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   private uploadSub: Subscription;
   private createSub: Subscription;
   private saveSub: Subscription;
+  private deleteSub: Subscription;
 
   totals: any;
 
@@ -382,7 +383,13 @@ export class LibcreateComponent implements OnInit, OnDestroy {
 
   public onDelete()
   {
-
+    this.deleteSub = this.uploadService.deleteTemplate(this.selection).subscribe(() => {
+      alert('Template deleted.');
+      window.location.reload();
+    },
+    message => {
+      alert('The template wasn\'t deleted correctly. Please try again.');
+    });
   }
 
   ngOnDestroy()
@@ -410,6 +417,11 @@ export class LibcreateComponent implements OnInit, OnDestroy {
     if (this.saveSub)
     {
       this.saveSub.unsubscribe();
+    }
+
+    if (this.deleteSub)
+    {
+      this.deleteSub.unsubscribe();
     }
   }
 }
