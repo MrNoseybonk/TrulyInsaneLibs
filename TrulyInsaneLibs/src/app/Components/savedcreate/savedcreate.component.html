@@ -11,7 +11,7 @@
                 </select>
             </form>
         </div>
-        <app-libcreate [selection]="this.selection"></app-libcreate>
+        <app-libcreate [selection]="this.selection" [savedcreate]="true" [userType]="this.loggedUser.userType"></app-libcreate>
     </div>
     <div class="loggedOut" id="loggedOut">
         <p>Please login to use this functionality.</p>

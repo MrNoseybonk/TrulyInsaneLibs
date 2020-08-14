@@ -71,11 +71,17 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   @Input() file: string;
   @Input() dbLibName: string;
   @Input() selection: string;
+  @Input() savedcreate: boolean;
+  @Input() userType: number;
 
   // tslint:disable-next-line: max-line-length
   constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
 
   ngOnInit(): void {
+    if (this.savedcreate === true && this.userType === 1)
+    {
+      document.getElementById('deletetemplate').style.display = 'unset';
+    }
   }
 
   uploadLib(libName: string)
@@ -372,6 +378,11 @@ export class LibcreateComponent implements OnInit, OnDestroy {
     {
       alert('Please enter a name for your finished lib.');
     }
+  }
+
+  public onDelete()
+  {
+
   }
 
   ngOnDestroy()
