@@ -2,9 +2,19 @@
     <nav class="mainNav">
         <div class="navButtonSection">
             <a class="firstBtn" routerLink="/">Main Page</a>
-            <a class="secondBtn" routerLink="/filecreate">Create Insane Lib</a>
-            <a class="thirdBtn" routerLink="/fileupload">Upload An Insane Lib</a>
-            <a class="fourthBtn" routerLink="/savedcreate">Create Insane Lib From A Saved Template</a>
+            <div class="dropdown">
+                <button class="dropdowntop">Create An Insane Lib</button>
+                <div class="dropdownlist">
+                    <a class="secondBtn" routerLink="/filecreate">From File</a>
+                    <a class="fourthBtn" routerLink="/savedcreate">From Template</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropdowntop">Upload A Template</button>
+                <div class="dropdownlist">
+                    <a class="thirdBtn" routerLink="/fileupload">From File</a>
+                </div>
+            </div>
             <a class="fifthBtn" routerLink="/savedview">View Your Saved Libs</a>
             <a class="sixthBtn" id="navLogout" routerLink="/" (click)="logout()">Logout</a>
             <span class="loggedin" *ngIf=loggedUsername>Have fun, {{loggedUsername}}!</span>

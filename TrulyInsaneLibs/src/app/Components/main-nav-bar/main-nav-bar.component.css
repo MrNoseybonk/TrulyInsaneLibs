@@ -33,3 +33,36 @@
     white-space: normal;
     box-shadow: 2px 1px 3px black;
 }
+
+.dropdowntop
+{
+    cursor: pointer;
+    background-color: springgreen;
+    border: none;
+}
+
+.dropdown
+{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownlist
+{
+    margin-top: 8px;
+    display: none;
+    background-color: springgreen;
+    box-shadow: 1px 3px black;
+}
+
+.dropdownlist a
+{
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown:hover .dropdownlist
+{
+    display: block;
+    position: absolute;
+}
