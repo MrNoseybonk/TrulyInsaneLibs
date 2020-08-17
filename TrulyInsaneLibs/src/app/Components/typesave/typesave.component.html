@@ -1,1 +1,18 @@
-<p>typesave works!</p>
+<div class="body">
+    <div class="loggedIn" id="loggedIn">
+        <div class="intro">
+            <h2>Upload A Lib Template</h2>
+            <p>Please upload your txt file to be saved. Don't forget to give it a name.</p>
+        </div>
+        <div class="uploader">
+            <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
+                <textarea id="typedtemplate" formControlName="typedtemplate"></textarea>
+                <label for="libName" id="namelabel">Name</label><input type="text" id="libname" formControlName="libName" maxlength="25" placeholder="The name of your story template." />
+                <input type="submit" id="uploadbutton" [disabled]="formGroup.invalid" value="Upload" />
+            </form>
+        </div>
+    </div>
+    <div class="loggedOut" id="loggedOut">
+        <p>Please login to use this functionality.</p>
+    </div>
+</div>

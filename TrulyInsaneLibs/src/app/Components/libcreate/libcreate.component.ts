@@ -74,6 +74,7 @@ export class LibcreateComponent implements OnInit, OnDestroy {
   @Input() selection: string;
   @Input() savedcreate: boolean;
   @Input() userType: number;
+  @Input() typedlib: string;
 
   // tslint:disable-next-line: max-line-length
   constructor(private savedCreateService: SavedcreateService, private uploadService: FileuploadService, private libService: LibService) { }
@@ -206,6 +207,12 @@ export class LibcreateComponent implements OnInit, OnDestroy {
 
       // console.log(this.startingLib);
       this.uploadLib(this.dbLibName);
+    }
+    else if (this.typedlib)
+    {
+      this.startingLib = this.typedlib;
+
+      this.uploadLib('Typed In Lib');
     }
 
     const inputs = document.getElementById('inputs');

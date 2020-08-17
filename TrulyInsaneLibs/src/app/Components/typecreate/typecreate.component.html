@@ -1,1 +1,19 @@
-<p>typecreate works!</p>
+<div class="body">
+    <div class="loggedIn" id="loggedIn">
+        <div class="typecreate">
+            <div class="intro">
+                <h2>Lib Creation With Input</h2>
+                <p>Please type in the text to be used.</p>
+            </div>
+            <div class="uploader">
+                <form [formGroup] = "formGroup">
+                    <textarea id="typedlib" formControlName="typedlib"></textarea>
+                </form>
+            </div>
+        </div>
+        <app-libcreate id="libcreate" [typedlib]="this.formGroup.get('typedlib').value"></app-libcreate>
+    </div>
+    <div class="loggedOut" id="loggedOut">
+        <p>Please login to use this functionality.</p>
+    </div>
+</div>
