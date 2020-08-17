@@ -3,6 +3,16 @@
     display: none;
 }
 
+#createoptions
+{
+    width: 150px;
+}
+
+#templateoptions
+{
+    width: 135px;
+}
+
 .navButtonSection 
 {
     display: block;
