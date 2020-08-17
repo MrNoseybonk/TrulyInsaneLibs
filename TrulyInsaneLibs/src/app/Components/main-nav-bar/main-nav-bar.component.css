@@ -9,6 +9,11 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.firstBtn
+{
+    margin-right: 5px;
+}
+
 .secondBtn, .thirdBtn, .fourthBtn, .fifthBtn, .sixthBtn
 {
     margin-left: 10px;
@@ -24,7 +29,6 @@
 {
     width: 100%;
     padding-left: 10px;
-    padding-bottom: 10px;
     padding-right: 8px;
     padding-top: 10px;
     background-color: springgreen;
@@ -49,7 +53,7 @@
 
 .dropdownlist
 {
-    margin-top: 8px;
+    
     display: none;
     background-color: springgreen;
     box-shadow: 1px 3px black;
@@ -57,7 +61,7 @@
 
 .dropdownlist a
 {
-    padding: 10px;
+    padding: 5px;
     text-decoration: none;
     display: block;
 }
