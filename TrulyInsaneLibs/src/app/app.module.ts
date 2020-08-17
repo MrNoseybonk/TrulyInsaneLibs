@@ -18,6 +18,9 @@ import { NewuserComponent } from './Components/newuser/newuser.component';
 import { LibcreateComponent } from './Components/libcreate/libcreate.component';
 import { ModalService } from './modal.service';
 import { DomService } from './dom.service';
+import { TypecreateComponent } from './Components/typecreate/typecreate.component';
+import { TypesaveComponent } from './Components/typesave/typesave.component';
+import { HelpComponent } from './Components/help/help.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { DomService } from './dom.service';
     SavedcreateComponent,
     SaveviewComponent,
     NewuserComponent,
-    LibcreateComponent
+    LibcreateComponent,
+    TypecreateComponent,
+    TypesaveComponent,
+    HelpComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
