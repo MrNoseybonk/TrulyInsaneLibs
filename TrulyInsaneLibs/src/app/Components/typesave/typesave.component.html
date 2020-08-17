@@ -6,8 +6,8 @@
         </div>
         <div class="uploader">
             <form [formGroup] = "formGroup" (ngSubmit)="onSubmit()">
-                <textarea id="typedtemplate" formControlName="typedtemplate"></textarea>
-                <label for="libName" id="namelabel">Name</label><input type="text" id="libname" formControlName="libName" maxlength="25" placeholder="The name of your story template." />
+                <label for="libName" id="namelabel">Name</label><input type="text" id="libname" formControlName="libName" maxlength="25" placeholder="The name of your story template." /><br>
+                <textarea id="typedtemplate" formControlName="typedtemplate"></textarea><br>
                 <input type="submit" id="uploadbutton" [disabled]="formGroup.invalid" value="Upload" />
             </form>
         </div>
