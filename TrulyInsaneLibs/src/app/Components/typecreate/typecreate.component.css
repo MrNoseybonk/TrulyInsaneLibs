@@ -1,6 +1,13 @@
 #typedlib
 {
+    margin-top: 5px;
     margin-bottom: 10px;
     width: 400px;
     height: 400px;
+    max-width: 98%;
+}
+
+.insertbuttons
+{
+    display: inline;
 }

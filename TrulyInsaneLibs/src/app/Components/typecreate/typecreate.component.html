@@ -3,9 +3,25 @@
         <div class="typecreate">
             <div class="intro">
                 <h2>Lib Creation With Input</h2>
-                <p>Please type in the text to be used.</p>
+                <p>Please type in the text to be used. You can click on a corresponding button to insert a token of that
+                    word type into the text.
+                </p>
             </div>
             <div class="uploader">
+                <div class="insertbuttons">
+                    <button type="button" id="nouninsert" (click)="onNounClick()">Noun</button>
+                    <button type="button" id="pluralinsert" (click)="onPluralClick()">Plural Noun</button>
+                    <button type="button" id="properinsert" (click)="onProperClick()">Proper Noun</button>
+                    <button type="button" id="verbinsert" (click)="onVerbClick()">Verb</button>
+                    <button type="button" id="pastinsert" (click)="onPastClick()">Past Tense Verb</button>
+                    <button type="button" id="inginsert" (click)="onIngClick()">Active Verb</button>
+                    <button type="button" id="adjectiveinsert" (click)="onAdjectiveClick()">Adjective</button>
+                    <button type="button" id="colorinsert" (click)="onColorClick()">Color</button>
+                    <button type="button" id="adverbinsert" (click)="onAdverbClick()">Adverb</button>
+                    <button type="button" id="numberinsert" (click)="onNumberClick()">Number</button>
+                    <button type="button" id="foodinsert" (click)="onFoodClick()">Food</button>
+                    <button type="button" id="liquidinsert" (click)="onLiquidClick()">Liquid</button>
+                </div>
                 <form [formGroup] = "formGroup">
                     <textarea id="typedlib" formControlName="typedlib"></textarea>
                 </form>

@@ -25,7 +25,7 @@ public class LibService
 		Integer pasts = 0;
 		Integer foods = 0;
 		Integer liquids = 0;
-		String splitted[] = lib.split(" |;|,|\\.|-|:|\\R");
+		String splitted[] = lib.split("\"|\'| |\\|/|;|,|\\.|-|:|\\R");
 		
 		for (int i = 0; i < splitted.length; i++)
 		{
